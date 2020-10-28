@@ -17,5 +17,3 @@ def ntp_time(host="pool.ntp.org", port=123):
     return unpacked[10] + float(unpacked[11]) / 2**32 - NTP_DELTA
 
 
-if __name__ == "__main__":
-    print(time.ctime(ntp_time()).replace("  ", " "))
