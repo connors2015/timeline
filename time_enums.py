@@ -6,6 +6,8 @@ class TimeBlockCategories(Enum):
     POLITICS = 2
     TECH = 3
     BUSINESS = 4
-    LOCAL = 5
-    MISC = 6
+    MUSIC = 5
+    LOCAL = 6
+    EVENT = 7
+    MISC = 8
 
