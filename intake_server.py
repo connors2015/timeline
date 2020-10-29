@@ -50,14 +50,17 @@ class Server:
 
             print('')
 
-            if time.time() > (block_start_time + 60):
+            if time.time() >= (block_start_time + 60):
                 block_start_time = int(time.time())
 
                 fileName = './blocks/{}_{}'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')
                 pickle.dump(self.entry_buffer, file)
                 file.close()
+
+                print('*****************************************')
                 print('Timeblock #{} written at {}'.format(block_number, time.ctime(block_start_time)))
+                print('*****************************************')
 
                 self.entry_buffer.clear()
                 block_number = block_number + 1

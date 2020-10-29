@@ -35,7 +35,7 @@ class Entry:
         self.entry_url = url
         self.entry_url_hash = url_hasher.hexdigest()
 
-        hash_setup = '{}{}'.format(url, self.entry_ctime, self.user_id)
+        hash_setup = '{}{}{}'.format(url, self.entry_ctime, self.user_id)
         hash_setup = bytes(hash_setup, 'utf-8')
         entry_hasher.update(hash_setup)
 

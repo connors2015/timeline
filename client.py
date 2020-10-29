@@ -8,6 +8,13 @@ from time_enums import TimeBlockCategories
 import pickle
 import random
 import time
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
 
 
 class Client:
@@ -15,9 +22,13 @@ class Client:
     def __init__(self):
         self.client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001', session=True)
 
+
     def upload_to_ipfs(self, file):
         #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
-        res = self.client.add(file)['Hash']
+        try:
+            res = self.client.add(file)['Hash']
+        except:
+            print('IPFS Daemon not available.')
         return res
 
     def download_from_ipfs(self, res):
@@ -94,7 +105,7 @@ def main():
     #client.disconnect_from_ipfs()
     while True:
         client.upload_to_submission_server(res, '20.51.191.32', new_user)
-        time.sleep(random.randint(0,10))
+        time.sleep(random.randint(0,2))
     #client.view_on_ipfs(res)
     client.disconnect_from_ipfs()
 
