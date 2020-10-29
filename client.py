@@ -51,14 +51,14 @@ class Client:
         title = 'this is the title'
         hashed_res = bytes(hashed_res, 'utf-8')
         hashed_title = bytes(title, 'utf-8')
-        hashed_username = bytes(user.get_username(), 'utf-8')
+        #hashed_username = bytes(user.get_username(), 'utf-8')
         s.send(hashed_res)
-        s.send(hashed_username)
+        #s.send(hashed_username)
         s.sendall(hashed_title)
 
         s.close()
 
-        #print("The time got from the server is %s" % tm.decode('ascii'))
+        print("Sent submission")
         ipfs_servers = []
         ipfs_links_to_blocks = []
         return 1
