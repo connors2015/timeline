@@ -30,7 +30,7 @@ class Server:
 
 
             print('receiving data...')
-            data = serversocket.recv(1024)
+            data = clientsocket.recv(1024)
             print('data=%s', (data))
 
             entry = pickle.loads(data)
