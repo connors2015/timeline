@@ -62,6 +62,9 @@ class Entry:
     def open_url_snapshot(self):
         webbrowser.open('{}'.format(self.entry_url), new=2)
 
+    def set_ipfs_id(self, hash):
+        self.ipfs_id = hash
+
     def store_url_snapshot(self, url):
         url = self.entry_url
 

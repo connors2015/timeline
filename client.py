@@ -53,6 +53,7 @@ class Client:
         # tm = s.recv(1024)
 
         entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com')
+        entry.set_ipfs_id(hashed_res)
         entry_bytes = pickle.dumps(entry)
         print('made it to the pickle')
         #hashed_entry = bytes(entry)

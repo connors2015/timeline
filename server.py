@@ -31,11 +31,11 @@ class Server:
 
             print('receiving data...')
             data = clientsocket.recv(1024)
-            print('data=%s', (data))
+            #print('data=%s', (data))
 
             entry = pickle.loads(data)
 
-            print(entry.get_url())
+            print('{}\t{}\n{}\t{}'.format(entry.get_url(), entry.get_time(), entry.get_category(), entry.get_ipfs_id()))
 
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
