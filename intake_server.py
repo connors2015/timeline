@@ -57,7 +57,7 @@ class Server:
                 file = open(fileName, 'wb')
                 pickle.dump(self.entry_buffer, file)
                 file.close()
-                print('Timeblock #{} written at {}'.format(block_number, block_start_time))
+                print('Timeblock #{} written at {}'.format(block_number, time.ctime(block_start_time)))
 
                 self.entry_buffer.clear()
                 block_number = block_number + 1
