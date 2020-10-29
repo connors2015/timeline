@@ -17,6 +17,7 @@ class Entry:
     ipfs_id = ''
     location = ''
     user_id = ''
+    title = ''
 
     def __init__(self, category, url):
         url_hasher = hashlib.sha3_256()
