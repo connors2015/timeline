@@ -50,7 +50,7 @@ class Server:
             print(block_start_time, block_start_time+60)
             print('')
 
-            if block_start_time > (block_start_time + 60):
+            if (block_start_time + 60) > block_start_time:
                 block_start_time = ntp_time()
 
                 fileName = '{}_{}'.format(block_start_time, block_number)
