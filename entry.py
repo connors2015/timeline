@@ -25,15 +25,15 @@ class Entry:
         url_hasher.update(binary_url)
         self.title = ''
 
-        entry_ctime = ntp_time()
+        self.entry_ctime = ntp_time()
 
-        self.entry_time = time.ctime(entry_ctime)
+        self.entry_time_readable = time.ctime(self.entry_ctime)
 
         self.category = TimeBlockCategories(category)
         self.entry_url = url
         self.entry_url_hash = url_hasher.hexdigest()
 
-        hash_setup = '{}{}'.format(url, entry_ctime, self.user_id)
+        hash_setup = '{}{}'.format(url, self.entry_ctime, self.user_id)
         hash_setup = bytes(hash_setup, 'utf-8')
         entry_hasher.update(hash_setup)
 
@@ -47,7 +47,7 @@ class Entry:
         return self.category
 
     def get_time(self):
-        return self.entry_time
+        return self.entry_time_readable
 
     def get_ctime(self):
         return self.entry_ctime
