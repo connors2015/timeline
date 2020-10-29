@@ -8,8 +8,8 @@ import pickle
 
 class Server:
 
-    def __init__(self):
-        client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
+    #def __init__(self):
+        #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
 
     def listen_for_clients(self):
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
