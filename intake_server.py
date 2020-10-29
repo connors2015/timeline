@@ -50,10 +50,10 @@ class Server:
             print(block_start_time, block_start_time+60)
             print('')
 
-            if (block_start_time + 60) > block_start_time:
+            if ntp_time() > (block_start_time + 60):
                 block_start_time = ntp_time()
 
-                fileName = '{}_{}'.format(block_start_time, block_number)
+                fileName = './blocks/{}_{}'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')
                 pickle.dump(self.entry_buffer, file)
                 file.close()
