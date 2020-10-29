@@ -23,7 +23,9 @@ class Server:
         # queue up to 5 requests
         serversocket.listen(5)
 
-        block_start_time = ntp_time()
+        #block_start_time = ntp_time()
+        block_start_time = time.time()
+
 
         block_number = 0
 
@@ -34,7 +36,7 @@ class Server:
             print("Got a connection from %s" % str(addr))
 
 
-            print('receiving data...')
+            print('')
             data = clientsocket.recv(1024)
             #print('data=%s', (data))
 
@@ -47,11 +49,9 @@ class Server:
             self.entry_buffer.append(entry)
 
             print('')
-            print(block_start_time, block_start_time+60)
-            print('')
 
-            if ntp_time() > (block_start_time + 60):
-                block_start_time = int(ntp_time())
+            if time.time() > (block_start_time + 60):
+                block_start_time = int(time.time())
 
                 fileName = './blocks/{}_{}'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')

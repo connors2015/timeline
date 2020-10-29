@@ -25,7 +25,9 @@ class Entry:
         url_hasher.update(binary_url)
         self.title = ''
 
-        self.entry_ctime = ntp_time()
+        #self.entry_ctime = ntp_time()
+        self.entry_ctime = time.time()
+
 
         self.entry_time_readable = time.ctime(self.entry_ctime)
 
