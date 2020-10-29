@@ -29,10 +29,10 @@ class Server:
             user = clientsocket.recv(64)
             title = clientsocket.recv(256)
             hash = data.decode('utf-8')
-            decoded_user = data.decode('utf-8')
+            decoded_user = user.decode('utf-8')
             decoded_title = title.decode('utf-8')
 
-            print('{}\t{}\t{}'.format(hash, decoded_title, ntp_time()))
+            print('{}\t{}\t{}\t{}'.format(hash, decoded_title, decoded_user, ntp_time()))
 
 
 
