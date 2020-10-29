@@ -1,14 +1,19 @@
 import ipfshttpclient
 import webbrowser
 
+class Server:
+
+    def __init__(self):
+        client = ipfshttpclient.connect(addr='/ip4/127.0.0.1/tcp/5001')
+        client.close()
+        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hash)
+        webbrowser.open(open_string, new=2)
 
 
-client = ipfshttpclient.connect(addr='/ip4/127.0.0.1/tcp/5001')
-res = client.add('lightning.mp4')['Hash']
-print(res)
+def main():
 
-hash = '{}'.format(res)
+    server = Server()
 
-res = client.get(hash)
-open_string = 'http://127.0.0.1:8080/ipfs/{}'.format(hash)
-webbrowser.open(open_string, new=2)
+
+if __name__ == "__main__":
+    main()
