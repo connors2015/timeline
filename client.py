@@ -87,14 +87,14 @@ def main():
 
     client = Client()
     #print('Uploading.')
-    res = client.upload_to_ipfs('lightning.mp4')
+    res = client.upload_to_ipfs('file.txt')
     #print('Finished Uploading.')
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
     client.upload_to_submission_server(res, '20.51.191.32', new_user)
-    client.view_on_ipfs(res)
-    client.disconnect_from_ipfs()
+    #client.view_on_ipfs(res)
+    #client.disconnect_from_ipfs()
 
 
 

@@ -39,7 +39,7 @@ class Server:
 
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
-            #clientsocket.close()
+            clientsocket.close()
 
 
 def main():
