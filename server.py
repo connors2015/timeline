@@ -33,9 +33,12 @@ class Server:
             data = clientsocket.recv(1024)
             #print('data=%s', (data))
 
-            entry = pickle.loads(data)
+            try:
+                entry = pickle.loads(data)
+            except:
+                continue
 
-            print('{}\t{}\n{}\t{}'.format(entry.get_url(), entry.get_time(), entry.get_category(), entry.get_ipfs_id()))
+            print('{}\t\t{}\n{}\t{}'.format(entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
 
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
