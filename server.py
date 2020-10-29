@@ -3,6 +3,8 @@ import webbrowser
 import socket
 import time
 from ntp_time import ntp_time
+from entry import Entry
+import pickle
 
 class Server:
 
@@ -25,15 +27,15 @@ class Server:
             clientsocket, addr = serversocket.accept()
 
             print("Got a connection from %s" % str(addr))
-            data = clientsocket.recv(46)
-            #user = clientsocket.recv(64)
-            title = clientsocket.recv(256)
-            hash = data.decode('utf-8')
-            #decoded_user = user.decode('utf-8')
-            decoded_title = title.decode('utf-8')
 
-            print('{}\t{}\t{}'.format(hash, decoded_title, ntp_time()))
 
+            print('receiving data...')
+            data = serversocket.recv(1024)
+            print('data=%s', (data))
+
+            entry = pickle.loads(data)
+
+            print(entry.get_url())
 
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
