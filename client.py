@@ -1,6 +1,7 @@
 import ipfshttpclient
 import requests
 import webbrowser
+import socket
 
 
 class Client:
@@ -35,8 +36,21 @@ class Client:
     def upload_to_submission_server(self):
         return 1
 
-    def connect_submission_server(self, server):
+    def connect_submission_server(self):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        # get local machine name
+        host = socket.gethostname()
+        port = 9999
 
+        # connection to hostname on the port.
+        s.connect((host, port))
+
+        # Receive no more than 1024 bytes
+        tm = s.recv(1024)
+
+        s.close()
+
+        print("The time got from the server is %s" % tm.decode('ascii'))
         ipfs_servers = []
         ipfs_links_to_blocks = []
 
@@ -49,11 +63,12 @@ def main():
 
     client = Client()
     print('Uploading.')
-    res = client.upload_to_ipfs('lightning.mp4')
+    #res = client.upload_to_ipfs('lightning.mp4')
     print('Finished Uploading.')
     print('Downloading.')
-    client.view_on_ipfs(res)
-    client.disconnect_from_ipfs()
+    #client.view_on_ipfs(res)
+    #client.disconnect_from_ipfs()
+    client.connect_submission_server()
 
 
 
