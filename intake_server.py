@@ -46,6 +46,9 @@ class Server:
             print('{}\t\t{}\n{}\t{}'.format(entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
             self.entry_buffer.append(entry)
 
+            print('')
+            print(block_start_time)
+
             if block_start_time > (ntp_time() + 60):
                 block_start_time = ntp_time()
 

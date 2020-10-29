@@ -1,5 +1,4 @@
 import ipfshttpclient
-from ntp_time import ntp_time
 import requests
 import webbrowser
 import socket
