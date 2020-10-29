@@ -33,26 +33,34 @@ class Client:
         self.client.close()
         return True
 
-    def upload_to_submission_server(self):
-        return 1
-
-    def connect_submission_server(self):
+    def upload_to_submission_server(self, hash, server):
+        host = server
+        hashed_res = '{}'.format(hash)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # get local machine name
-        host = socket.gethostname()
+        #host = socket.gethostname()
         port = 9999
 
         # connection to hostname on the port.
-        s.connect(('20.51.191.32', port))
+        s.connect((host, port))
 
         # Receive no more than 1024 bytes
-        tm = s.recv(1024)
+        # tm = s.recv(1024)
+        title = 'this is the title'
+        hashed_res = bytes(hashed_res, 'utf-8')
+        hashed_title = bytes(title, 'utf-8')
+        s.send(hashed_res)
+        s.sendall(hashed_title)
 
         s.close()
 
-        print("The time got from the server is %s" % tm.decode('ascii'))
+        #print("The time got from the server is %s" % tm.decode('ascii'))
         ipfs_servers = []
         ipfs_links_to_blocks = []
+        return 1
+
+    def connect_submission_server(self):
+
 
         return 1
 
@@ -63,12 +71,13 @@ def main():
 
     client = Client()
     #print('Uploading.')
-    #res = client.upload_to_ipfs('lightning.mp4')
+    res = client.upload_to_ipfs('file.txt')
     #print('Finished Uploading.')
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-    client.connect_submission_server()
+    client.upload_to_submission_server(res, '127.0.0.1')
+    client.disconnect_from_ipfs()
 
 
 

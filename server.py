@@ -2,6 +2,7 @@ import ipfshttpclient
 import webbrowser
 import socket
 import time
+from ntp_time import ntp_time
 
 class Server:
 
@@ -24,9 +25,18 @@ class Server:
             clientsocket, addr = serversocket.accept()
 
             print("Got a connection from %s" % str(addr))
-            currentTime = time.ctime(time.time()) + "\r\n"
-            clientsocket.send(currentTime.encode('ascii'))
-            clientsocket.close()
+            data = clientsocket.recv(46)
+            title = clientsocket.recv(256)
+            hash = data.decode('utf-8')
+            decoded_title = title.decode('utf-8')
+
+            print('{}\t{}\t{}'.format(hash, decoded_title, ntp_time()))
+
+
+
+            #currentTime = time.ctime(time.time()) + "\r\n"
+            #clientsocket.send(currentTime.encode('ascii'))
+            #clientsocket.close()
 
 
 def main():
