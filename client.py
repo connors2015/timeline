@@ -34,7 +34,7 @@ class Client:
         self.client.close()
         return True
 
-    def upload_to_submission_server(self, hash, server, user: User):
+    def upload_to_submission_server(self, hash, server, user):
         user = user
         host = server
         hashed_res = '{}'.format(hash)
@@ -73,7 +73,7 @@ class Client:
 
 def main():
 
-    new_user = User
+    new_user = User()
 
     client = Client()
     #print('Uploading.')
