@@ -50,8 +50,8 @@ class Server:
             print(block_start_time, block_start_time+60)
             print('')
 
-            if ntp_time() > (block_start_time + 20):
-                block_start_time = ntp_time()
+            if ntp_time() > (block_start_time + 60):
+                block_start_time = int(ntp_time())
 
                 fileName = './blocks/{}_{}'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')
