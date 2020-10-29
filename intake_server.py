@@ -47,7 +47,7 @@ class Server:
             self.entry_buffer.append(entry)
 
             print('')
-            print(block_start_time)
+            print(time.ctime(block_start_time))
 
             if block_start_time > (ntp_time() + 60):
                 block_start_time = ntp_time()
