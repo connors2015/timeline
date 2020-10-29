@@ -43,14 +43,14 @@ class Server:
             except:
                 continue
 
-            print('{}\t\t{}\n{}\t{}'.format(entry.get_ctime(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
+            print('{}\t\t{}\n{}\t{}'.format(entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
             self.entry_buffer.append(entry)
 
             print('')
             print(block_start_time, block_start_time+60)
             print('')
 
-            if ntp_time() > (block_start_time + 60):
+            if ntp_time() > (block_start_time + 20):
                 block_start_time = ntp_time()
 
                 fileName = './blocks/{}_{}'.format(block_start_time, block_number)
