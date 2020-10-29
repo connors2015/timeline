@@ -3,6 +3,9 @@ import requests
 import webbrowser
 import socket
 from user import *
+from entry import Entry
+from time_enums import TimeBlockCategories
+import pickle
 
 
 class Client:
@@ -48,13 +51,22 @@ class Client:
 
         # Receive no more than 1024 bytes
         # tm = s.recv(1024)
-        title = 'this is the title'
-        hashed_res = bytes(hashed_res, 'utf-8')
-        hashed_title = bytes(title, 'utf-8')
+        entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com')
+        file = open('export.pkl', 'wb')
+        pickle.dump(entry, file)
+        #hashed_entry = bytes(entry)
+        #title = 'Flying over NYC in MSF2020'
+        #hashed_res = bytes(hashed_res, 'utf-8')
+        #hashed_title = bytes(title, 'utf-8')
         #hashed_username = bytes(user.get_username(), 'utf-8')
-        s.send(hashed_res)
+        l = file.read(1024)
+        while (l):
+            s.send(l)
+            print('Sent ', repr(l))
+            l = file.read(1024)
+        file.close()
         #s.send(hashed_username)
-        s.sendall(hashed_title)
+        #s.sendall(hashed_title)
 
         s.close()
 
@@ -77,12 +89,13 @@ def main():
 
     client = Client()
     #print('Uploading.')
-    res = client.upload_to_ipfs('file.txt')
+    res = client.upload_to_ipfs('NYC_Final_fixed.mp4')
     #print('Finished Uploading.')
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
     client.upload_to_submission_server(res, '20.51.191.32', new_user)
+    client.view_on_ipfs(res)
     client.disconnect_from_ipfs()
 
 
