@@ -8,8 +8,9 @@ import pickle
 
 class Server:
 
-    #def __init__(self):
+    def __init__(self):
         #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
+        self.entry_buffer = []
 
     def listen_for_clients(self):
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -39,6 +40,7 @@ class Server:
                 continue
 
             print('{}\t\t{}\n{}\t{}'.format(entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
+            self.entry_buffer.append(entry)
 
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))

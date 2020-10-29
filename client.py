@@ -1,4 +1,5 @@
 import ipfshttpclient
+from ntp_time import ntp_time
 import requests
 import webbrowser
 import socket
@@ -6,6 +7,8 @@ from user import *
 from entry import Entry
 from time_enums import TimeBlockCategories
 import pickle
+import random
+import time
 
 
 class Client:
@@ -52,10 +55,9 @@ class Client:
         # Receive no more than 1024 bytes
         # tm = s.recv(1024)
 
-        entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com')
+        entry = Entry(random.randint(0, 8), 'www.reddit.com/{}'.format(random.randint(0,3000000)))
         entry.set_ipfs_id(hashed_res)
         entry_bytes = pickle.dumps(entry)
-        print('made it to the pickle')
         #hashed_entry = bytes(entry)
         #title = 'Flying over NYC in MSF2020'
         #hashed_res = bytes(hashed_res, 'utf-8')
@@ -69,14 +71,12 @@ class Client:
 
         s.close()
 
-        print("Sent submission")
+        print("Sent submission\t{}".format(time.ctime(ntp_time())))
         ipfs_servers = []
         ipfs_links_to_blocks = []
         return 1
 
     def connect_submission_server(self):
-
-
         return 1
 
     def connect_comment_server(self):
@@ -93,9 +93,11 @@ def main():
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-    client.upload_to_submission_server(res, '20.51.191.32', new_user)
+    while True:
+        client.upload_to_submission_server(res, '20.51.191.32', new_user)
+        time.sleep(random.randint(0,5))
     #client.view_on_ipfs(res)
-    #client.disconnect_from_ipfs()
+    client.disconnect_from_ipfs()
 
 
 

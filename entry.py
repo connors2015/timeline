@@ -9,27 +9,30 @@ import hashlib
 class Entry:
 
     category = TimeBlockCategories.MISC
-    entry_ctime = ntp_time()
-    entry_time = time.ctime(entry_ctime)
+
     entry_url = ''
     entry_url_hash = ''
     entry_hash = ''
     ipfs_id = ''
     location = ''
     user_id = ''
-    title = ''
+
 
     def __init__(self, category, url):
         url_hasher = hashlib.sha3_256()
         entry_hasher = hashlib.sha3_256()
         binary_url = bytes(url, 'utf-8')
         url_hasher.update(binary_url)
+        self.title = ''
+
+        entry_ctime = ntp_time()
+        self.entry_time = time.ctime(entry_ctime)
 
         self.category = TimeBlockCategories(category)
         self.entry_url = url
         self.entry_url_hash = url_hasher.hexdigest()
 
-        hash_setup = '{}{}'.format(url, self.entry_ctime, self.user_id)
+        hash_setup = '{}{}'.format(url, entry_ctime, self.user_id)
         hash_setup = bytes(hash_setup, 'utf-8')
         entry_hasher.update(hash_setup)
 
@@ -59,6 +62,12 @@ class Entry:
 
     def get_location(self):
         return self.location
+
+    def set_title(self, title):
+        self.title = title
+
+    def get_title(self):
+        return self.title
 
     def open_url_snapshot(self):
         webbrowser.open('{}'.format(self.entry_url), new=2)
