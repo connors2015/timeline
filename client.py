@@ -43,7 +43,7 @@ class Client:
         port = 9999
 
         # connection to hostname on the port.
-        s.connect((host, port))
+        s.connect(('20.51.191.32', port))
 
         # Receive no more than 1024 bytes
         tm = s.recv(1024)
@@ -62,10 +62,10 @@ class Client:
 def main():
 
     client = Client()
-    print('Uploading.')
+    #print('Uploading.')
     #res = client.upload_to_ipfs('lightning.mp4')
-    print('Finished Uploading.')
-    print('Downloading.')
+    #print('Finished Uploading.')
+    #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
     client.connect_submission_server()
