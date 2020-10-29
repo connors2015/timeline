@@ -71,7 +71,7 @@ class Client:
 
         s.close()
 
-        print("Sent submission\t{}".format(time.ctime(ntp_time())))
+        print("Sent submission\t{}".format(entry.get_time()))
         ipfs_servers = []
         ipfs_links_to_blocks = []
         return 1
@@ -95,7 +95,7 @@ def main():
     #client.disconnect_from_ipfs()
     while True:
         client.upload_to_submission_server(res, '20.51.191.32', new_user)
-        time.sleep(random.randint(0,5))
+        time.sleep(random.randint(0,10))
     #client.view_on_ipfs(res)
     client.disconnect_from_ipfs()
 

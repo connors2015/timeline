@@ -23,6 +23,10 @@ class Server:
         # queue up to 5 requests
         serversocket.listen(5)
 
+        block_start_time = ntp_time()
+
+        block_number = 0
+
         while True:
             # establish a connection
             clientsocket, addr = serversocket.accept()
@@ -41,6 +45,18 @@ class Server:
 
             print('{}\t\t{}\n{}\t{}'.format(entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
             self.entry_buffer.append(entry)
+
+            if block_start_time > (ntp_time() + 60):
+                block_start_time = ntp_time()
+
+                fileName = '{}_{}'.format(block_start_time, block_number)
+                file = open(fileName, 'wb')
+                pickle.dump(self.entry_buffer, file)
+                file.close()
+                print('Timeblock #{} written at {}'.format(block_number, block_start_time))
+
+                self.entry_buffer.clear()
+                block_number = block_number + 1
 
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
