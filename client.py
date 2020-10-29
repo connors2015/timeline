@@ -2,6 +2,7 @@ import ipfshttpclient
 import requests
 import webbrowser
 import socket
+from user import *
 
 
 class Client:
@@ -33,7 +34,8 @@ class Client:
         self.client.close()
         return True
 
-    def upload_to_submission_server(self, hash, server):
+    def upload_to_submission_server(self, hash, server, user: User):
+        user = user
         host = server
         hashed_res = '{}'.format(hash)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -49,7 +51,9 @@ class Client:
         title = 'this is the title'
         hashed_res = bytes(hashed_res, 'utf-8')
         hashed_title = bytes(title, 'utf-8')
+        hashed_username = bytes(user.get_username(), 'utf-8')
         s.send(hashed_res)
+        s.send(hashed_username)
         s.sendall(hashed_title)
 
         s.close()
@@ -69,6 +73,8 @@ class Client:
 
 def main():
 
+    new_user = User
+
     client = Client()
     #print('Uploading.')
     res = client.upload_to_ipfs('file.txt')
@@ -76,7 +82,7 @@ def main():
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-    client.upload_to_submission_server(res, '127.0.0.1')
+    client.upload_to_submission_server(res, '20.51.191.32', new_user)
     client.disconnect_from_ipfs()
 
 
