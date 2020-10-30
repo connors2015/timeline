@@ -18,10 +18,11 @@ class Client:
         self.client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001', session=True)
 
     
-    def upload_to_ipfs(self, file):
+    def upload_to_ipfs(self, fileName):
         client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001')
         try:
-            res = self.client.add(file)['Hash']
+            
+            res = self.client.add('static/'+fileName)['Hash']
         except:
             print('IPFS Daemon not available.')
         return res
