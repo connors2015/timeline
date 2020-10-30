@@ -41,7 +41,7 @@ class Client:
     def view_on_web_client(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
         return open_string
         #webbrowser.open(open_string, new=2)
 
