@@ -38,6 +38,13 @@ class Client:
         open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=2)
 
+    def view_on_web_client(self, res):
+        hashed_res = '{}'.format(res)
+        #res = self.client.get(hashed_res)
+        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        return open_string
+        #webbrowser.open(open_string, new=2)
+
     def connect_to_ipfs(self):
         return 1
 
