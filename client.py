@@ -10,16 +10,16 @@ import random
 import time
 
 
-
+IP='13.82.102.90'
 
 class Client:
 
     def __init__(self):
-        self.client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001', session=True)
+        self.client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001', session=True)
 
     
     def upload_to_ipfs(self, file):
-        client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
+        client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001')
         try:
             res = self.client.add(file)['Hash']
         except:
@@ -29,19 +29,19 @@ class Client:
     def download_from_ipfs(self, res):
         hashed_res = '{}'.format(res)
         res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'http://'+IP+':8080/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=0)
 
     def view_on_ipfs(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'http://'+IP+':8080/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=2)
 
     def view_on_web_client(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'http://'+IP+':8080/ipfs/{}'.format(hashed_res)
         return open_string
         #webbrowser.open(open_string, new=2)
 
