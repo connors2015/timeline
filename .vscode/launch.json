@@ -10,7 +10,7 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "client.py",
+                "FLASK_APP": "web_client.py",
                 "FLASK_ENV": "development",
                 "FLASK_DEBUG": "0"
             },
@@ -19,6 +19,6 @@
                 "--no-debugger"
             ],
             "jinja": true
-        }
+        },
     ]
 }

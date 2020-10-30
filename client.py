@@ -8,21 +8,6 @@ from time_enums import TimeBlockCategories
 import pickle
 import random
 import time
-from flask import Flask
-from flask import render_template
-
-app = Flask(__name__)
-
-@app.route('/')
-def hello_world():
-    return render_template('index.html')
-
-@app.route('/upload/')
-def run_upload():
-    #file = open('file.txt', 'r')
-    client = Client()
-    upload = client.upload_to_ipfs('file.txt')
-    return 'Upload Successfull! {}'.format(upload)
 
 
 
@@ -104,9 +89,9 @@ class Client:
 
 def main():
 
-    app.run()
+    #app.run()
 
-    #new_user = User()
+    new_user = User()
 
     #client = Client()
     #print('Uploading.')
@@ -120,8 +105,6 @@ def main():
     #    time.sleep(random.randint(0,2))
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-
-
 
 if __name__ == "__main__":
     main()
