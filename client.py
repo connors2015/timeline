@@ -88,7 +88,7 @@ class Client:
         ipfs_links_to_blocks = []
         return 1
 
-    def connect_submission_server(self):
+    def connect_post_server(self):
         return 1
 
     def connect_comment_server(self):

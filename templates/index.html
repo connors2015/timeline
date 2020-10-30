@@ -22,22 +22,11 @@ table {
 .button1 {
   background-color: white;
   color: black;
-  border: 2px solid #4CAF50;
+  border: 2px solid #ff0000;
 }
 
 .button1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
-
-.button2 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
-
-.button2:hover {
-  background-color: #008CBA;
+  background-color: #ff3d02;
   color: white;
 }
 
@@ -62,8 +51,27 @@ table {
                     <table>
                         <tr>
                             <td>
-                                <button class="button button1">Green</button>
-                                <button class="button button2">Blue</button>
+                                <form action="/server_connect/">
+                                    <label for="server">Choose your browser from the list:</label>
+                                    <input list="servers" name="server" id="server">
+                                    <datalist id="servers">
+                                      <option value="Timeline Main">
+                                      <option value="Timeline Backup">
+                                      <option value="Other Server #1">
+                                      <option value="Other Server #2">
+                                      <option value="Other Server #3">
+                                    </datalist>
+                                    <input type="submit">
+                                  </form>
+                            </td>
+                            <td>
+                                <b>Connection Status:</b>
+                                {% if connected %}
+                                {{ connected }}!
+                                {% else %}
+                                Disconnected
+                                {% endif %}
+                                <button class="button button1">Red</button>
                             </td>
                         </tr>
                     </table>

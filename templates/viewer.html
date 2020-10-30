@@ -61,6 +61,20 @@ table {
             <table>
               <tr>
                 <td>
+                  <form action="/server_connect/">
+                    <label for="servers">Choose your browser from the list:</label>
+                    <input list="server" name="server" id="server">
+                    <datalist id="servers">
+                      <option value="Timeline Main">
+                      <option value="Timeline Backup">
+                      <option value="Other Server #1">
+                      <option value="Other Server #2">
+                      <option value="Other Server #3">
+                    </datalist>
+                    <input type="submit">
+                  </form>
+                </td>
+                <td>
                   <button class="button button1">Green</button>
                   <button class="button button2">Blue</button>
                 </td>
