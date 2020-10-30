@@ -16,15 +16,24 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World!'
 
+@app.route('/upload/')
+def run_upload():
+    #file = open('file.txt', 'r')
+    client = Client()
+    upload = client.upload_to_ipfs('file.txt')
+    return 'Upload Successfull! {}'.format(upload)
+
+
+
 
 class Client:
 
     def __init__(self):
         self.client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001', session=True)
 
-
+    
     def upload_to_ipfs(self, file):
-        #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
+        client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
         try:
             res = self.client.add(file)['Hash']
         except:
@@ -94,20 +103,22 @@ class Client:
 
 def main():
 
-    new_user = User()
+    app.run()
 
-    client = Client()
+    #new_user = User()
+
+    #client = Client()
     #print('Uploading.')
-    res = client.upload_to_ipfs('file.txt')
+    #res = client.upload_to_ipfs('file.txt')
     #print('Finished Uploading.')
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-    while True:
-        client.upload_to_submission_server(res, '20.51.191.32', new_user)
-        time.sleep(random.randint(0,2))
+    #while True:
+    #    client.upload_to_submission_server(res, '20.51.191.32', new_user)
+    #    time.sleep(random.randint(0,2))
     #client.view_on_ipfs(res)
-    client.disconnect_from_ipfs()
+    #client.disconnect_from_ipfs()
 
 
 
