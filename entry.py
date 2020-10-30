@@ -9,8 +9,7 @@ import hashlib
 class Entry:
 
     category = TimeBlockCategories.MISC
-    entry_ctime = ntp_time()
-    entry_time = time.ctime(entry_ctime)
+
     entry_url = ''
     entry_url_hash = ''
     entry_hash = ''
@@ -18,17 +17,25 @@ class Entry:
     location = ''
     user_id = ''
 
+
     def __init__(self, category, url):
         url_hasher = hashlib.sha3_256()
         entry_hasher = hashlib.sha3_256()
         binary_url = bytes(url, 'utf-8')
         url_hasher.update(binary_url)
+        self.title = ''
+
+        #self.entry_ctime = ntp_time()
+        self.entry_ctime = time.time()
+
+
+        self.entry_time_readable = time.ctime(self.entry_ctime)
 
         self.category = TimeBlockCategories(category)
         self.entry_url = url
         self.entry_url_hash = url_hasher.hexdigest()
 
-        hash_setup = '{}{}'.format(url, self.entry_ctime, self.user_id)
+        hash_setup = '{}{}{}'.format(url, self.entry_ctime, self.user_id)
         hash_setup = bytes(hash_setup, 'utf-8')
         entry_hasher.update(hash_setup)
 
@@ -42,7 +49,7 @@ class Entry:
         return self.category
 
     def get_time(self):
-        return self.entry_time
+        return self.entry_time_readable
 
     def get_ctime(self):
         return self.entry_ctime
@@ -59,8 +66,17 @@ class Entry:
     def get_location(self):
         return self.location
 
+    def set_title(self, title):
+        self.title = title
+
+    def get_title(self):
+        return self.title
+
     def open_url_snapshot(self):
         webbrowser.open('{}'.format(self.entry_url), new=2)
+
+    def set_ipfs_id(self, hash):
+        self.ipfs_id = hash
 
     def store_url_snapshot(self, url):
         url = self.entry_url
