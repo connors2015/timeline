@@ -30,6 +30,5 @@
         "venv.bak{,/**}",
         ".vscode{,/**}"
     ],
-    "appService.deploySubpath": ".",
-    "appService.defaultWebAppToDeploy": "/subscriptions/9749d13a-6bf0-4416-ad14-3be1ca544d3b/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/timeline-app"
+    "appService.deploySubpath": "."
 }
