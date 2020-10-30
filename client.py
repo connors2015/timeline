@@ -29,19 +29,19 @@ class Client:
     def download_from_ipfs(self, res):
         hashed_res = '{}'.format(res)
         res = self.client.get(hashed_res)
-        open_string = 'http://'+IP+':8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=0)
 
     def view_on_ipfs(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://'+IP+':8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=2)
 
     def view_on_web_client(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://'+IP+':8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         return open_string
         #webbrowser.open(open_string, new=2)
 
