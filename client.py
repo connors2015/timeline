@@ -14,18 +14,21 @@ IP='13.82.102.90'
 
 class Client:
 
+    isConnected = False
+
     def __init__(self):
         self.client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001', session=True)
+        self.isConnected = True
 
     
     def upload_to_ipfs(self, fileName):
         client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001')
-        try:
-            
-            res = self.client.add('static/'+fileName)['Hash']
+        try:            
+            res = self.client.add('./static/'+fileName)['Hash']
         except:
             print('IPFS Daemon not available.')
         return res
+
 
     def download_from_ipfs(self, res):
         hashed_res = '{}'.format(res)
