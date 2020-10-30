@@ -44,34 +44,29 @@ table {
 </style>
 </head>
 <body>
-
-    <table style="height: 24px; width: 100%; float: center;padding: 5px;border: 1px solid black;">
-        <tbody>
-          <tr>
-            <td style="width: 30%;"><strong>Timeline</strong></td>
-            <td style="width: 30%;">&nbsp;</td>
-            <td style="width: 30%; text-align: right;">2020-10-29</td>
-          </tr>
-        </tbody>
-    </table>
-    <form action="/">>
-      <button>Home</button>
-    </form>
-    <table style="height: 600px; width:100%; border-color: black;">
+    <table style="height: 24px; width: 1000px; float: center;padding: 5px;border: 1px solid black;">
       <tbody>
-        <tr style="height: 90%;">
-          <td style="width: 20%; height: 60%;">
-
-            <form method=post enctype=multipart/form-data action="/upload">
-              <input type=file name=file>
-              <input type=submit value=Upload>
-            </form>
-            
-            <table>
+        <tr>
+          <td style="width: 30%;">
+              <form action="/">>
+                  <button>Home</button>
+              </form>
+          </td>>
+          <td style="width: 30%;"><strong>Timeline</strong></td>>
+          <td style="width: 30%; text-align: right;">{{ time }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p></p>
+    <table style="height: 600px; width:1000px; border-color: black;">
+      <tbody>
+        <tr style="height: 150px;">
+          <td>
+            <table style="height: 150px">
               <tr>
                 <td>
                   <form action="/server_connect/">
-                    <label for="servers">Choose your browser from the list:</label>
+                    <label for="servers">Choose post server:</label>
                     <input list="server" name="server" id="server">
                     <datalist id="servers">
                       <option value="Timeline Main">
@@ -83,28 +78,56 @@ table {
                     <input type="submit">
                   </form>
                 </td>
+              </tr>
+
+              <tr>
                 <td>
-                  <button class="button button1">Your mom</button>
-                  <button class="button button2">a hoe</button>
+                  <b>Connected to IPFS:</b>
+                      {% if connected %}
+                      {{ connected }}
+                      {% else %}
+                      False
+                      {% endif %}
                 </td>
               </tr>
+              <p></p>
+              <tr>
+                <td>
+                  <form method=post enctype=multipart/form-data action="/upload">
+                    <input type=file name=file>
+                    <input type=submit value=Upload>
+                  </form>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <form action="/">
+                    <label for="viewer_length">Choose viewer length:</label>
+                    <input list="viewer_lengths" name="viewer_length" id="viewer_length">
+                    <datalist id="viewer_lengths">
+                      <option value="1 min">
+                      <option value="5 min">
+                      <option value="15 min">
+                      <option value="1 hour">
+                      <option value="12 hours">
+                    </datalist>
+                    <input type="submit" value="Change View Length">
+                  </form>
+                </td>
+              </tr>
+
             </table>
-          Servers
-          <form action="/upload/lightning.mp4">>
-            <button>Upload video</button>
-        </form>
-        <form action="/upload/file.txt">>
-          <button>Upload file</button>
-        </form>
-        </td>
-          <td style="width: 65%; height: 60%;"><iframe src="{{link}}", width=720px, height="100%", controls></iframe></td>
-          <td style="width: 20%; height: 60%;">&nbsp;full scroll</td>
-        </tr>
-        <tr style="height: 82px;">
-          <td style="width: 20%; height: 82px;">&nbsp;user/settings</td>
-          <td style="width: 65%; height: 82px;">&nbsp;comments</td>
-          <td style="width: 20%; height: 82px;">&nbsp;ad</td>
-        </tr>
+
+          </td>
+            <td style="width: 65%; height: 60%;"><iframe  style="border:none;" src="{{link}}", width=720px, height=480px, controls></iframe></td>
+            <td style="width: 20%; height: 60%;">&nbsp;full scroll</td>
+          </tr>
+          <tr style="height: 82px;">
+            <td style="width: 20%; height: 82px;">&nbsp;user/settings</td>
+            <td style="width: 65%; height: 82px;">&nbsp;comments</td>
+            <td style="width: 20%; height: 82px;">&nbsp;ad</td>
+          </tr>
       </tbody>
     </table>
         <p>&nbsp;</p>
