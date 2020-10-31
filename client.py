@@ -10,38 +10,42 @@ import random
 import time
 
 
-
+IP='13.82.102.90'
 
 class Client:
 
+    isConnected = False
+
     def __init__(self):
-        self.client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001', session=True)
+        self.client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001', session=True)
+        self.isConnected = True
 
     
-    def upload_to_ipfs(self, file):
-        client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
-        try:
-            res = self.client.add(file)['Hash']
+    def upload_to_ipfs(self, fileName):
+        client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001')
+        try:            
+            res = self.client.add('./static/'+fileName)['Hash']
         except:
             print('IPFS Daemon not available.')
         return res
 
+
     def download_from_ipfs(self, res):
         hashed_res = '{}'.format(res)
         res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=0)
 
     def view_on_ipfs(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=2)
 
     def view_on_web_client(self, res):
         hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'http://20.51.191.32:8080/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         return open_string
         #webbrowser.open(open_string, new=2)
 
@@ -88,7 +92,7 @@ class Client:
         ipfs_links_to_blocks = []
         return 1
 
-    def connect_submission_server(self):
+    def connect_post_server(self):
         return 1
 
     def connect_comment_server(self):
