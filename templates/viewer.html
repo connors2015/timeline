@@ -1,136 +1,124 @@
 <!DOCTYPE html>
 <html>
-<head>
-<style>
-table {
-  border-spacing: 5px;
-}
+    <head>
+        <style>
 
-.button {
-  border: none;
-  color: white;
-  padding: 16px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  transition-duration: 0.4s;
-  cursor: pointer;
-}
+        .content {
+        max-width: 1200px;
+        margin: auto;
+        }
 
-.button1 {
-  background-color: white;
-  color: black;
-  border: 2px solid #4CAF50;
-}
+        table {
+        border-spacing: 5px;
+        }
 
-.button1:hover {
-  background-color: #4CAF50;
-  color: white;
-}
+        .button {
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        }
 
-.button2 {
-  background-color: white;
-  color: black;
-  border: 2px solid #008CBA;
-}
+        .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #ff0000;
+        }
 
-.button2:hover {
-  background-color: #008CBA;
-  color: white;
-}
+        .button1:hover {
+        background-color: #ff3d02;
+        color: white;
+        }
 
-</style>
-</head>
-<body>
-    <table style="height: 24px; width: 1000px; float: center;padding: 5px;border: 1px solid black;">
-      <tbody>
-        <tr>
-          <td style="width: 30%;">
-              <form action="/">>
-                  <button>Home</button>
-              </form>
-          </td>>
-          <td style="width: 30%;"><strong>Timeline</strong></td>>
-          <td style="width: 30%; text-align: right;">{{ time }}</td>
-        </tr>
-      </tbody>
-    </table>
-    <p></p>
-    <table style="height: 600px; width:1000px; border-color: black;">
-      <tbody>
-        <tr style="height: 150px;">
-          <td>
-            <table style="height: 150px">
-              <tr>
-                <td>
-                  <form action="/server_connect/">
-                    <label for="servers">Choose post server:</label>
-                    <input list="server" name="server" id="server">
-                    <datalist id="servers">
-                      <option value="Timeline Main">
-                      <option value="Timeline Backup">
-                      <option value="Other Server #1">
-                      <option value="Other Server #2">
-                      <option value="Other Server #3">
-                    </datalist>
-                    <input type="submit">
-                  </form>
-                </td>
-              </tr>
+        </style>
 
-              <tr>
-                <td>
-                  <b>Connected to IPFS:</b>
-                      {% if connected %}
-                      {{ connected }}
-                      {% else %}
-                      False
-                      {% endif %}
-                </td>
-              </tr>
-              <p></p>
-              <tr>
-                <td>
-                  <form method=post enctype=multipart/form-data action="/upload">
-                    <input type=file name=file>
-                    <input type=submit value=Upload>
-                  </form>
-                </td>
-              </tr>
+    </head>
 
-              <tr>
-                <td>
-                  <form action="/">
-                    <label for="viewer_length">Choose viewer length:</label>
-                    <input list="viewer_lengths" name="viewer_length" id="viewer_length">
-                    <datalist id="viewer_lengths">
-                      <option value="1 min">
-                      <option value="5 min">
-                      <option value="15 min">
-                      <option value="1 hour">
-                      <option value="12 hours">
-                    </datalist>
-                    <input type="submit" value="Change View Length">
-                  </form>
-                </td>
-              </tr>
-
+    <body>
+        <div class='content'>
+            <table style="height: 24px; width: 100%; float: center;padding: 0px;border: 1px solid black;">
+                <tbody>
+                    <tr>
+                        <td style="width: 33%;">
+                            <form action="/">
+                                <button>Home</button>
+                            </form>
+                        </td>>
+                        <td style="width: 33%;"><strong>Timeline</strong></td>
+                        <td style="width: 33%; text-align: right;">{{ time }}</td>
+                    </tr>
+                </tbody>
             </table>
+            <p></p>
 
-          </td>
-            <td style="width: 65%; height: 60%;"><iframe  style="border:none;" src="{{link}}", width=720px, height=480px, controls></iframe></td>
-            <td style="width: 20%; height: 60%;">&nbsp;full scroll</td>
-          </tr>
-          <tr style="height: 82px;">
-            <td style="width: 20%; height: 82px;">&nbsp;user/settings</td>
-            <td style="width: 65%; height: 82px;">&nbsp;comments</td>
-            <td style="width: 20%; height: 82px;">&nbsp;ad</td>
-          </tr>
-      </tbody>
-    </table>
-        <p>&nbsp;</p>
 
-</body>
+            <table style="height: 800px; width:100%; border-color: black;">
+                <tbody>
+                    <tr style="height: 100%;">
+                        <td colspan="2" style="width:20%;">
+                            <iframe style="border: 1px solid black; height:100%; width:100%;" src="{{link}}" title="page"></iframe>
+                        </td>
+                        <td style="border: 2px solid black; width:200px;">comments</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; height: 5px; border: 1px solid black;padding: 0px;">
+                            <b>Connected to IPFS:</b>
+                            {% if connected %}
+                            {{ connected }}
+                            {% else %}
+                            False
+                            {% endif %}
+                        </td>
+                        <td style="width: 55%; height: 5px; border: 1px solid black;padding: 0px;">zoom selector</td>
+                        <td style="width: 25%; height: 5px; border: 1px solid black;padding: 0px;"></td>
+                    </tr>
+                    <tr style="height: 82px;">
+                        <td style="width: 20%; height: 150px; border: 1px solid black;padding: 0px;">
+                            <table style="height: 150px">
+                            
+                                <tr>
+                                    <td>
+                                        <form action="/server_connect/">
+                                            <label for="server">Choose post server:</label>
+                                            <input list="servers" name="server" id="server">
+                                            <datalist id="servers">
+                                            <option value="Timeline Main">
+                                            <option value="Timeline Backup">
+                                            <option value="Other Server #1">
+                                            <option value="Other Server #2">
+                                            <option value="Other Server #3">
+                                            </datalist>
+                                            <input type="submit">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    
+                                    </td>
+                                </tr>
+                                <p></p>
+                                <tr>
+                                    <td>
+                                    <form method=post enctype=multipart/form-data action="/upload">
+                                        <input type=file name=file>
+                                        <input type=submit value=Upload>
+                                    </form>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 55%; height: 82px;"></td>
+                        <td style="width: 25%; height: 82px;">ad</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
 </html>
