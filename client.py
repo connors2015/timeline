@@ -54,16 +54,17 @@ class Client:
 
     def disconnect_from_ipfs(self):
         self.client.close()
+        self.isConnected = False
         return True
 
-    def upload_to_submission_server(self, hash, server, user):
-        user = user
-        host = server
-        hashed_res = '{}'.format(hash)
+    def upload_to_submission_server(self, entry, server):
+        #user = user
+        host = IP #switch to server eventually
+        #hashed_res = '{}'.format(entry.get_ipfs_id)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         # get local machine name
         #host = socket.gethostname()
-        port = 9999
+        port = 58444
 
         # connection to hostname on the port.
         s.connect((host, port))
@@ -71,8 +72,8 @@ class Client:
         # Receive no more than 1024 bytes
         # tm = s.recv(1024)
 
-        entry = Entry(random.randint(0, 8), 'www.reddit.com/{}'.format(random.randint(0,3000000)))
-        entry.set_ipfs_id(hashed_res)
+        #entry = Entry(random.randint(0, 8), 'www.reddit.com/{}'.format(random.randint(0,3000000)))
+        #entry.set_ipfs_id(hashed_res)
         entry_bytes = pickle.dumps(entry)
         #hashed_entry = bytes(entry)
         #title = 'Flying over NYC in MSF2020'

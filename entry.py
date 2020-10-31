@@ -69,16 +69,19 @@ class Entry:
     def set_title(self, title):
         self.title = title
 
+    def set_url(self, url):
+        self.entry_url = url
+
     def get_title(self):
         return self.title
 
     def open_url_snapshot(self):
         webbrowser.open('{}'.format(self.entry_url), new=2)
 
-    def set_ipfs_id(self, hash):
-        self.ipfs_id = hash
+    def set_ipfs_id(self, hashed_link):
+        self.ipfs_id = hashed_link
 
-    def store_url_snapshot(self, url):
+    def store_url_snapshot(self):
         url = self.entry_url
 
         response = urllib.request.urlopen(url)

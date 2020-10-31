@@ -106,16 +106,28 @@
                                 <p></p>
                                 <tr>
                                     <td>
-                                    <form method=post enctype=multipart/form-data action="/upload">
-                                        <input type=file name=file>
-                                        <input type=submit value=Upload>
-                                    </form>
+                                   
                                     </td>
                                 </tr>
                             </table>
                         </td>
                         <td style="width: 55%; height: 82px; border: 1px solid black;padding: 0px;">
-                            
+                            <strong>Create new post:</strong>
+                            <p></p>
+                            <form method=post enctype=multipart/form-data action="/new_post">
+                                <label>Title:</label><input type=text id=title name=title><br>
+                                <label>URL:</label><input type=text id=url name=url><br>
+                                <p></p>
+                                <label for="server">Choose post category:</label>
+                                <input list="categories" name="category" id="category">
+                                <datalist id="categories">
+                                    <option value='MISC'>
+                                    <option value='Sports'>
+                                </datalist>
+                                <p></p>
+                                <input type=file name=file>
+                                <input type=submit value=Submit>
+                            </form>
                         </td>
                         <td style="width: 25%; height: 82px; border: 1px solid black;padding: 0px;">
                             <form action="https://paypal.me/timelineapp?locale.x=en_US" method="get" target="_blank">
