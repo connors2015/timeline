@@ -62,7 +62,7 @@
                 <tbody>
                     <tr style="height: 100%;">
                         <td colspan="2" style="width:20%;">
-                            <iframe style="border: 1px solid black; height:100%; width:100%;" src="{{link}}" title="page"></iframe>
+                            <iframe style="border: 1px solid black; height:100%; width:100%;" allowfullscreen=true src="{{link}}" title="page"></iframe>
                         </td>
                         <td style="border: 2px solid black; width:200px;">comments</td>
                     </tr>
@@ -94,7 +94,7 @@
                                             <option value="Other Server #2">
                                             <option value="Other Server #3">
                                             </datalist>
-                                            <input type="submit">
+                                            <input type="submit" value="Connect">
                                         </form>
                                     </td>
                                 </tr>
@@ -115,7 +115,11 @@
                             </table>
                         </td>
                         <td style="width: 55%; height: 82px; border: 1px solid black;padding: 0px;"></td>
-                        <td style="width: 25%; height: 82px; border: 1px solid black;padding: 0px;">ad</td>
+                        <td style="width: 25%; height: 82px; border: 1px solid black;padding: 0px;">
+                          <form action="https://paypal.me/timelineapp?locale.x=en_US" method="get" target="_blank">
+                            <button type="submit">Donate</button>
+                         </form>
+                        </td>
                     </tr>
                 </tbody>
             </table>

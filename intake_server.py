@@ -15,7 +15,7 @@ class Server:
     def listen_for_clients(self):
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         host = ''
-        port = 9999
+        port = 58444
 
         # bind to the port
         serversocket.bind((host, port))
