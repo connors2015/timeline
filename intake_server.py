@@ -8,6 +8,7 @@ import pickle
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
 import os
 import uuid
+from time_block import TimeBlock
 
 class Server:
 
@@ -35,8 +36,16 @@ class Server:
 
         block_number = 0
 
+        first_block = True
+        old_block = TimeBlock(1)
+
         while True:
-            '''
+            if first_block == True:
+                time_block = old_block
+                first_block = False
+            else:
+                time_block = TimeBlock(old_block.get_block_hash)
+            
             # establish a connection
             clientsocket, addr = serversocket.accept()
 
@@ -57,20 +66,24 @@ class Server:
 
             print('')
 
-            '''
 
-            if 1<2:#time.time() >= (block_start_time + 10):
+            entry = Entry("MISC", "www.reddit.com")
+
+            time_block.add_new_entry(entry)
+
+            if 1<2:#time.time() >= (block_start_time + 60):
                 block_start_time = int(time.time())
 
                 fileName = './blocks/{}_{}.blk'.format(block_start_time, block_number)
+                upload_filename = '{}_{}.blk'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')
-                pickle.dump(self.entry_buffer, file)
+                pickle.dump(time_block, file)
                 file.close()
 
                 connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
                 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
                 container_client = blob_service_client.get_container_client("timeline-blocks")
-                blob_client = container_client.get_blob_client(blob=fileName)
+                blob_client = container_client.get_blob_client(blob=upload_filename)
 
                 with open(fileName, "rb") as data:
                     blob_client.upload_blob(data, blob_type="BlockBlob")
@@ -79,10 +92,15 @@ class Server:
                 print('Timeblock #{} written at {}'.format(block_number, time.ctime(block_start_time)))
                 print('*****************************************')
 
-                os.remove(fileName)
+                try:
+                    os.remove(fileName)
+                except:
+                    break
 
                 self.entry_buffer.clear()
                 block_number = block_number + 1
+
+                old_block = time_block
 
           
 
