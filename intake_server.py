@@ -37,24 +37,21 @@ class Server:
         block_number = 0
 
         first_block = True
-        old_block = TimeBlock(1)
+        old_block_hash = '1'
 
         while True:
-            if first_block == True:
-                time_block = old_block
-                first_block = False
-            else:
-                time_block = TimeBlock(old_block.get_block_hash())
+            time_block = TimeBlock(old_block_hash)
 
             clientsocket, addr = serversocket.accept() 
             print("Got a connection from %s" % str(addr))
             print('')
-            data = clientsocket.recv(1024)
+            data = clientsocket.recv(4096)
             #print('data=%s', (data))
 
             try:
                 entry = pickle.loads(data)
             except:
+                print('no entry ERROR ERROR')
                 entry = Entry(0)
                 break
 
@@ -67,6 +64,7 @@ class Server:
             #entry = Entry("MISC", "www.reddit.com")
 
             time_block.add_new_entry(entry)
+            print('entry added')
             print(sys.getsizeof(time_block))
 
             if (block_start_time + 60) < time.time():
@@ -98,7 +96,7 @@ class Server:
                 self.entry_buffer.clear()
                 block_number = block_number + 1
 
-                old_block = time_block
+                old_block_hash = time_block.get_block_hash()
 
           
 
