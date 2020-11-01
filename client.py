@@ -156,7 +156,7 @@ class Client:
                 #bytes_read = pickle.loads(bytes_read)
                 file.write(bytes_read)
                 print('writing file')
-            s.send(1)
+            s.send(b'1')
            
 
             
