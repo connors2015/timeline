@@ -51,6 +51,9 @@ def upload_new_post():
         except:
             print('Failed to submit post to server.')
             ##need to return to somewhere for errors.
+        
+        if os.path.exists('./static/' + secure_filename(file.filename)):
+            os.remove('./static/' + secure_filename(file.filename))
 
         return render_template('viewer.html', link=web_link, connected = client.isConnected, time = time.ctime())
     else:
@@ -62,6 +65,8 @@ def upload_new_post():
         except:
             print('Failed to submit post to server.')
             ##need to return to somewhere for errors.
+
+    
 
         return render_template('viewer.html', link=url, connected = client.isConnected, time = time.ctime())
 
