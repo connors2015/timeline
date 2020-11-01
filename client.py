@@ -132,15 +132,22 @@ class Client:
 
         #s.close()
 
-        new_data = b''
-
         data = s.recv(1024)        
 
-        file_list = pickle.loads(new_data)
+        file_list = pickle.loads(data)
+        new_file_list = []
 
         for items in file_list:
+            new_file_list.append(items.decode())
+        
+        print(file_list)
+        print(new_file_list)
+
+        for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
-            with open(filename, 'rb') as file:
+            print(filesize)
+            filename = "./static/"+filename
+            with open(filename, 'wb') as file:
                 bytes_read = s.recv(int(filesize))
                 if not bytes_read:
                     break
