@@ -62,9 +62,7 @@
                 <tbody>
                     <tr style="height: 100%;">
                         <td colspan="2" style="width:20%;">
-                          
                             <iframe style="border: 1px solid black; height:100%; width:100%;" src="{{link}}" title="page"></iframe>
-                       
                         </td>
                         <td style="border: 2px solid black; width:200px;">comments</td>
                     </tr>
@@ -120,13 +118,20 @@
                                 <label>Title:</label><input type=text id=title name=title><br>
                                 <label>URL:</label><input type=text id=url name=url><br>
                                 <p></p>
-                                <label for="server">Choose post category:</label>
+                                <label for="category">Choose post category:</label>
                                 <input list="categories" name="category" id="category">
                                 <datalist id="categories">
-                                    <option value='MISC'>
-                                    <option value='Sports'>
+                                    <option value=0>General</option>
+                                    <option value=1>Sports</option>                      
+                                    <option value=2>Politics</option>
+                                    <option value=3>Tech</option>
+                                    <option value=4>Business</option>
+                                    <option value=5>Music</option>
+                                    <option value=6>Local</option>
+                                    <option value=7>Event</option>
+                                    <option value=8>MISC</option>
                                 </datalist>
-                                <p></p>
+                                <p></p>  
                                 <input type=file name=file>
                                 <input type=submit value=Submit>
                             </form>

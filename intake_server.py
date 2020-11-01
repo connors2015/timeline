@@ -5,6 +5,8 @@ import time
 from ntp_time import ntp_time
 from entry import Entry
 import pickle
+from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
+import os
 
 class Server:
 
@@ -29,6 +31,9 @@ class Server:
 
         block_number = 0
 
+        print(os.getenv('AZURE_STORAGE_CONNECTION_STRING'))
+        print('hi')
+
         while True:
             # establish a connection
             clientsocket, addr = serversocket.accept()
@@ -50,6 +55,8 @@ class Server:
 
             print('')
 
+         
+
             if time.time() >= (block_start_time + 60):
                 block_start_time = int(time.time())
 
@@ -65,12 +72,21 @@ class Server:
                 self.entry_buffer.clear()
                 block_number = block_number + 1
 
+          
+
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
             clientsocket.close()
 
 
 def main():
+
+    try:
+        print("Azure Blob storage v" + __version__ + " - Python quickstart sample")
+        # Quick start code goes here
+    except Exception as ex:
+        print('Exception:')
+        print(ex)
 
     server = Server()
     server.listen_for_clients()
