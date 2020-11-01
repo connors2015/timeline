@@ -143,6 +143,8 @@ class Client:
         print(file_list)
         print(new_file_list)
 
+        print(len(new_file_list))
+
         for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
             print(filesize)
@@ -153,7 +155,9 @@ class Client:
                     break
                 #bytes_read = pickle.loads(bytes_read)
                 file.write(bytes_read)
-                file.close()
+                print('writing file')
+            s.send(1)
+           
 
             
 
