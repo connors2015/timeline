@@ -11,7 +11,8 @@ import time
 
 
 
-IP='13.82.102.90'
+#IP='13.82.102.90'
+IP='127.0.0.1'
 
 class Client:
 
@@ -79,6 +80,7 @@ class Client:
 
     def upload_to_submission_server(self, entry, server):
         #user = user
+        entry = entry
         host = IP #switch to server eventually
         #hashed_res = '{}'.format(entry.get_ipfs_id)
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -125,16 +127,17 @@ def main():
 
     new_user = User()
 
-    #client = Client()
+    client = Client()    
     #print('Uploading.')
     #res = client.upload_to_ipfs('file.txt')
     #print('Finished Uploading.')
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-    #while True:
-    #    client.upload_to_submission_server(res, '20.51.191.32', new_user)
-    #    time.sleep(random.randint(0,2))
+    while True:
+        entry = Entry(TimeBlockCategories.MISC, 'reddit.com')
+        client.upload_to_submission_server(entry, '1')
+        time.sleep(random.randint(0,10))
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
 

@@ -59,7 +59,7 @@ class Server:
 
          
 
-            if time.time() >= (block_start_time + 60):
+            if time.time() >= (block_start_time + 10):
                 block_start_time = int(time.time())
 
                 fileName = './blocks/{}_{}.blk'.format(block_start_time, block_number)
