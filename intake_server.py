@@ -45,13 +45,15 @@ class Server:
                 first_block = False
             else:
                 time_block = TimeBlock(old_block.get_block_hash)
-            
-            # establish a connection
-            clientsocket, addr = serversocket.accept()
 
+            while (block_start_time + 60) < time.time():
+                clientsocket, addr = serversocket.accept()
+                break
+                
+            else:
+                write_block()        
+                
             print("Got a connection from %s" % str(addr))
-
-
             print('')
             data = clientsocket.recv(1024)
             #print('data=%s', (data))
@@ -71,7 +73,7 @@ class Server:
 
             time_block.add_new_entry(entry)
 
-            if 1<2:#time.time() >= (block_start_time + 60):
+            def write_block():
                 block_start_time = int(time.time())
 
                 fileName = './blocks/{}_{}.blk'.format(block_start_time, block_number)
@@ -92,10 +94,9 @@ class Server:
                 print('Timeblock #{} written at {}'.format(block_number, time.ctime(block_start_time)))
                 print('*****************************************')
 
-                try:
-                    os.remove(fileName)
-                except:
-                    break
+               
+                os.remove(fileName)
+               
 
                 self.entry_buffer.clear()
                 block_number = block_number + 1
@@ -107,6 +108,7 @@ class Server:
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
             clientsocket.close()
+            block_start_time = time.time()
 
 
 def main():
