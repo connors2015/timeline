@@ -37,10 +37,10 @@ def upload_new_post():
     title  = request.form['title']
     url = request.form['url']
     print(title, url)
+    print('made it in.***********************')
+    print(request.form['categories'])
 
-    print(request.form['category'])
-
-    post_category = TimeBlockCategories(int((request.form['category'])))
+    post_category = TimeBlockCategories(int((request.form['categories'])))
 
     entry = Entry(post_category, url)
     #run upload file and retrieve IPFS hash and IPFS web hash

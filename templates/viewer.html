@@ -25,6 +25,7 @@
 				padding-left: 20px;
 				overflow: hidden; /* Disables scrollbars on the header frame. To enable scrollbars, change "hidden" to "scroll" */
 				background: #000000;
+                text-decoration: none;
 			}
 			
 			#nav {
@@ -44,10 +45,10 @@
 			main {
 				position: fixed;
 				top: 80px; /* Set this to the height of the header */
-				/*right: 50%; /* Set this to the width of the nav bar */ 
+				right: 200px; /* Set this to the width of the nav bar */ 
 				width: 100%;
 				bottom: 0;
-				overflow: auto; 
+				overflow:hidden; 
 				background: rgb(0, 0, 0);
 			}
 			
@@ -121,16 +122,14 @@
 
 		<header id="header">
 			<div id="logo" style="vertical-align:bottom;">
-				<strong style="color: aliceblue;">Timeline</strong><br>
+				<a href="/"><strong style="color: aliceblue; text-decoration: none; text-decoration-line: none;">Timeline</strong></a><br>
 				<strong style="color: aliceblue;">{{ time }}</strong>
 			</div>
 			
 		</header>
 				
 		<main> 
-			<div>
-                <iframe style="border: 1px solid black; height:100%; width:100%;" src="{{link}}" title="page"></iframe>
-			</div>
+                <embed style="border: 1px solid black; height:100%; width:100%;" src="{{link}}" title="page"></embed>	
 		</main>
 
 		<nav id="nav">
