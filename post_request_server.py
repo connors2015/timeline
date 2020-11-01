@@ -10,8 +10,6 @@ class PostServer:
 
     def __init__(self):
         self.amount_of_blocks = 1
-        self.retrieve_blocks(1)
-        breakpoint
 
     def listen_for_requests():
 
