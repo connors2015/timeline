@@ -66,6 +66,7 @@ class Server:
             #entry = Entry("MISC", "www.reddit.com")
 
             time_block.add_new_entry(entry)
+            print(os.path.getsize(time_block))
 
             if (block_start_time + 60) < time.time():
 

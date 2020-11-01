@@ -166,9 +166,9 @@ class Client:
             filename, filesize = items.split(SEPARATOR)
             filename = "./static/"+filename
             print(filename)
-            file = open(filename, 'rb')
             print('file size:', os.path.getsize(filename))
-            timeblock = pickle.loads(file.read())
+            with open(filename, 'rb') as file:            
+                timeblock = pickle.loads(file.read())
             timeblocks.append(timeblock)
             file.close()
 
