@@ -55,7 +55,9 @@ class PostServer:
                 print(counter)
                 filename = "./static/"+items
                 print(filename)
+                print(type(filename))
                 file = open(filename, 'r')
+                print(type(file))
                 #with open(filename, 'r') as data:
                 #    print(type(data))
                 data = pickle.dumps(file)
