@@ -160,11 +160,12 @@ class Client:
             s.send(b'1')
 
         timeblocks = []
+
         for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
             filename = "./static/"+filename
             print(filename)
-            file = open(filename, 'rb')
+            file = open(filename, 'r')
             timeblock = pickle.load(file)
             print(timeblock)
             timeblocks.append(timeblock)

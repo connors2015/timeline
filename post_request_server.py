@@ -58,7 +58,7 @@ class PostServer:
                 print(type(filename))
                 #file = open(filename, 'w')
                 #print(type(file))
-                with open(filename, 'r') as data:
+                with open(filename, 'rb') as data:
                     clientsocket.sendall(data)
                 clientsocket.recv(1024)
                 counter = counter + 1
