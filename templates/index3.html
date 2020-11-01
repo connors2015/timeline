@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+
+        .content {
+        max-width: 1200px;
+        margin: auto;
+        }
+
+        table {
+        border-spacing: 5px;
+        }
+
+        .button {
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.4s;
+        cursor: pointer;
+        }
+
+        .button1 {
+        background-color: white;
+        color: black;
+        border: 2px solid #ff0000;
+        }
+
+        .button1:hover {
+        background-color: #ff3d02;
+        color: white;
+        }
+
+        </style>
+
+    </head>
+
+    <body>
+        <div class='content'>
+
+            <table style="height: 24px; width: 100%; float: center;padding: 0px;border: 1px solid black;">
+                <tbody>
+                    <tr>
+                        <td style="width: 33%;">
+                            <form action="/">
+                                <button>Timeline Home</button>
+                            </form>
+                        </td>>
+                        <td style="width: 33%; text-align: center;"></td>
+                        <td style="width: 33%; text-align: right;">{{ time }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p></p>
+
+
+            <table style="height: 800px; width:100%; border-color: black; overflow-y:scroll">
+                <tbody>
+                    <tr style="height: 100%;">
+                        <div style="overflow-y: scrolls;">
+                            <td colspan="2" style="border: 1px solid black; height:100%; width:100%; padding: 5px;">
+                                {% for items in posts %}
+                                    <div style="background-color: beige;">
+                                        <p>
+                                            {% if items.get_ipfs_id() != '' %}
+                                            <a href='https://ipfs.io/ipfs/{{ items.get_ipfs_id() }}'><strong>{{ items.get_title() }}</strong></a>
+                                            {% else %}
+                                            <strong>{{ items.get_title() }}</strong>
+                                            {% endif %}
+                                        </p>
+                                        <p>
+                                            <a href='https://{{ items.get_url() }}'>{{ items.get_url() }}</a><br>
+                                            IPFS id: {{ items.get_ipfs_id() }}
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </div>
+                        <td style="border: 2px solid black; width:200px;">
+                            <iframe style="border: 1px solid black; height:100%; width:100%;" src="./static/home.html" title="page"></iframe>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width: 20%; height: 5px; border: 1px solid black;padding: 0px;">
+                            <b>Connected to IPFS:</b>
+                            {% if connected %}
+                            {{ connected }}
+                            {% else %}
+                            False
+                            {% endif %}
+                        </td>
+                        <td style="width: 55%; height: 5px; border: 1px solid black;padding: 0px;">zoom selector</td>
+                        <td style="width: 25%; height: 5px; border: 1px solid black;padding: 0px;"></td>
+                    </tr>
+                    <tr style="height: 82px;">
+                        <td style="width: 20%; height: 150px; border: 1px solid black;padding: 0px;">
+                            <table style="height: 150px">
+                            
+                                <tr>
+                                    <td>
+                                        <form action="/server_connect/">
+                                            <label for="server">Choose post server:</label>
+                                            <input list="servers" name="server" id="server">
+                                            <datalist id="servers">
+                                            <option value="Timeline Main">
+                                            <option value="Timeline Backup">
+                                            <option value="Other Server #1">
+                                            <option value="Other Server #2">
+                                            <option value="Other Server #3">
+                                            </datalist>
+                                            <input type="submit" value="Connect">
+                                        </form>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    
+                                    </td>
+                                </tr>
+                                <p></p>
+                                <tr>
+                                    <td>
+                                   
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="width: 55%; height: 82px; border: 1px solid black;padding: 0px;">
+                            <strong>Create new post:</strong>
+                            <p></p>
+                            <form method=post enctype=multipart/form-data action="/new_post">
+                                <label>Title:</label><input type=text id=title name=title><br>
+                                <label>URL:</label><input type=text id=url name=url><br>
+                                <p></p>
+                                <label for="category">Choose post category:</label>
+                                <input list="categories" name="category" id="category">
+                                <datalist id="categories">
+                                    <option value=0>General</option>
+                                    <option value=1>Sports</option>                      
+                                    <option value=2>Politics</option>
+                                    <option value=3>Tech</option>
+                                    <option value=4>Business</option>
+                                    <option value=5>Music</option>
+                                    <option value=6>Local</option>
+                                    <option value=7>Event</option>
+                                    <option value=8>MISC</option>
+                                </datalist>
+                                <p></p>  
+                                <input type=file name=file>
+                                <input type=submit value=Submit>
+                            </form>
+                        </td>
+                        <td style="width: 25%; height: 82px; border: 1px solid black;padding: 0px;">
+                            <form action="https://paypal.me/timelineapp?locale.x=en_US" method="get" target="_blank">
+                                <button type="submit">Donate</button>
+                             </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </body>
+</html>
