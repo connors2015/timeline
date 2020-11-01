@@ -10,6 +10,7 @@ import random
 import time
 from time_block import TimeBlock
 import os
+import sys
 
 
 
@@ -151,13 +152,16 @@ class Client:
             filename, filesize = items.split(SEPARATOR)
             print(filesize)
             filename = "./static/"+filename
+            bytes_read = b'1'
             with open(filename, 'wb') as file:
-                bytes_read = s.recv(int(filesize))
-                if not bytes_read:
-                    break
-                #bytes_read = pickle.loads(bytes_read)
-                file.write(bytes_read)
-                print('writing file')
+                while sys.getsizeof(bytes_read) < int(filesize):
+                    bytes_read = s.recv(4096)
+                    print('size of bytes read:', sys.getsizeof(bytes_read))
+                    if not bytes_read:
+                      break
+                    #bytes_read = pickle.loads(bytes_read)
+                    file.write(bytes_read)
+                    print('writing file')
             s.send(b'1')
 
         timeblocks = []
@@ -170,7 +174,7 @@ class Client:
             with open(filename, 'rb') as file:            
                 timeblock = pickle.loads(file.read())
             timeblocks.append(timeblock)
-            file.close()
+            #file.close()
 
         entries = []
 
