@@ -158,43 +158,11 @@
 			<div class="innertube">
 				<h1>Post Options</h1>
 				<div>
-					<form action="/server_connect/">
-						<label for="server">Choose post server:</label>
-						<input list="servers" name="server" id="server">
-						<datalist id="servers">
-						<option value="Timeline Main">
-						<option value="Timeline Backup">
-						<option value="Other Server #1">
-						<option value="Other Server #2">
-						<option value="Other Server #3">
-						</datalist>
-						<input type="submit" value="Connect">
+					<form action="/make_new_post">
+						<input type="submit" value="Submit Post">
 					</form>
 				</div>
-				<div>
-					<form method=post enctype=multipart/form-data action="/new_post">
-						<label>Title:</label><input type=text id=title name=title><br>
-						<label>URL:</label><input type=text id=url name=url><br>
-						<p></p>
-						<label for="category">Post category:</label>
-						<input list="categories" name="category" id="category">
-						<datalist id="categories">
-							<option value=0>General</option>
-							<option value=1>Sports</option>                      
-							<option value=2>Politics</option>
-							<option value=3>Tech</option>
-							<option value=4>Business</option>
-							<option value=5>Music</option>
-							<option value=6>Local</option>
-							<option value=7>Event</option>
-							<option value=8>MISC</option>
-						</datalist>
-						<p></p>  
-						<input type=file name=file>
-						<input type=submit value=Submit>
-					</form>
-				</div>
-
+				
 				<h1>Comment Server</h1>
 				<ul>
 					<li><a href="#">Link 1</a></li>

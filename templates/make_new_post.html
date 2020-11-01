@@ -129,33 +129,6 @@
 				
 		<main> 
 			<div>
-					{% for items in posts %}									
-						<div class = "feature" style="background-color: rgb(131, 131, 131);">
-							<p>
-								{% if items.get_ipfs_id() != '' %}
-								<a href='https://ipfs.io/ipfs/{{ items.get_ipfs_id() }}'></a>
-								<strong>{{ items.get_title() }}</strong>
-								{% else %}
-								<strong>{{ items.get_title() }}</strong>
-								<a href='https://{{ items.get_url() }}'></a>
-								{% endif %}
-							</p>
-							<p>								
-								{% if items.get_ipfs_id() != '' %}				                        
-								{{ items.get_url() }}<br>
-								IPFS id: {{ items.get_ipfs_id() }}<span class="tab">{{ items.get_time() }}</span>
-								{% else %}
-								{{ items.get_url() }}<br>
-								IPFS id: {{ items.get_ipfs_id() }}<span class="tab2">{{ items.get_time() }}</span>
-								{% endif %}
-							</p>
-						</div>
-                	{% endfor %}                
-			</div>
-		</main>
-
-		<nav id="nav">
-			<div class="innertube">
 				<h1>Post Options</h1>
 				<div>
 					<form action="/server_connect/">
@@ -192,6 +165,17 @@
 						<p></p>  
 						<input type=file name=file>
 						<input type=submit value=Submit>
+					</form>
+				</div> 
+			</div>
+		</main>
+
+		<nav id="nav">
+			<div class="innertube">
+				<h1>Post Options</h1>
+				<div>
+					<form action="/make_new_post">
+						<input type="submit" value="Submit Post">
 					</form>
 				</div>
 

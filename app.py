@@ -26,6 +26,10 @@ def index():
     #posts = [entry,entry,entry] #use when there are no blocks
     return render_template('index.html', time = time.ctime(), connected = client.isConnected, posts = posts)
 
+@app.route('/make_new_post')
+def make_new_post():
+    return render_template('make_new_post.html', time=time.ctime(), connected= client.isConnected)
+
 @app.route('/new_post', methods=['POST', 'GET'])
 def upload_new_post():
 
