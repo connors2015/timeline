@@ -8,6 +8,7 @@ import pickle
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
 import os
 from time_block import TimeBlock
+import sys
 
 class Server:
 
@@ -66,7 +67,7 @@ class Server:
             #entry = Entry("MISC", "www.reddit.com")
 
             time_block.add_new_entry(entry)
-            print(os.path.getsize(time_block))
+            print(sys.getsizeof(time_block))
 
             if (block_start_time + 60) < time.time():
 
