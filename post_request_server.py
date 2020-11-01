@@ -49,8 +49,6 @@ class PostServer:
             clientsocket.sendall(pickle.dumps(sending_file_list))
 
             print(file_list)
-
-          
         
             counter = 0
 

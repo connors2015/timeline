@@ -146,16 +146,20 @@ class Client:
         print(file_list)
         print(new_file_list)
 
+        from urllib.request import urlretrieve
+        
+
         print(len(new_file_list))
         for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
             #filename = "./static/"+filename
             with open(filename, 'wb') as data_file:
-                url='http://13.82.102.90:58442/static/'
-                data = requests.get(url=url, params=items)
+                url='http://13.82.102.90:58442/static/'+filename
+                data = requests.get(url=url)
                 print(data)
-                data_file.write(data.content)
+                data_file.write(data.raw)
         
+        print(sys.getsizeof(data_file)
         print('Obtained data.')
 
 
@@ -175,7 +179,7 @@ class Client:
 
             print('wrote file')
             s.send(b'1')
-        '''
+        
         timeblocks = []
         
         for items in new_file_list:
@@ -185,7 +189,7 @@ class Client:
             print('file size:', os.path.getsize(filename))
             file = open(filename, 'rb')             
             time_block = TimeBlock(1)
-            time_block = pickle.load(file.read())      
+            time_block = pickle.loads(file.read())      
             #timeblock = pickle.load(file.read())
             timeblocks.append(time_block)
             #file.close()
@@ -202,7 +206,7 @@ class Client:
 
         for items in entries:
             print(items.get_ipfs_id())
-        
+        '''
         posts = [Entry(1, 'r'), Entry(1,'r'),Entry(1, 'r')]
         return posts
 
