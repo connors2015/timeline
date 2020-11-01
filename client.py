@@ -131,6 +131,8 @@ class Client:
 
         #s.close()
 
+        posts = [1,2,3]
+
         return posts
 
     def connect_comment_server(self):
