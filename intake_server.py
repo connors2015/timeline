@@ -73,7 +73,7 @@ class Server:
                 blob_client = container_client.get_blob_client(blob=fileName)
 
                 with open(fileName, "rb") as data:
-                    blob_client.upload_blob(data)
+                    blob_client.upload_blob(data, blob_type="BlockBlob")
 
                 print('*****************************************')
                 print('Timeblock #{} written at {}'.format(block_number, time.ctime(block_start_time)))
