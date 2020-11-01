@@ -68,7 +68,7 @@ class Server:
 
             time_block.add_new_entry(entry)
 
-            if (block_start_time + 60) > time.time():
+            if (block_start_time + 60) < time.time():
 
                 block_start_time = int(time.time())
 
