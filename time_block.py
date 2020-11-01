@@ -12,7 +12,7 @@ class TimeBlock:
 
     def __init__(self, previous_ipfs_hash):
         self.previous_ipfs_hash = previous_ipfs_hash
-        self.block_ctime = ntp_time()
+        self.block_ctime = time.time()
         self.block_time = time.ctime(self.block_ctime)
         self.entries = []
 

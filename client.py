@@ -168,20 +168,24 @@ class Client:
             print(filename)
             file = open(filename, 'rb')
             print('file size:', os.path.getsize(filename))
-            timeblock = TimeBlock(1)
             timeblock = pickle.loads(file.read())
             timeblocks.append(timeblock)
+            file.close()
 
         entries = []
 
+        print('number of timeblocks:', len(timeblocks))
+
         for items in timeblocks:
-            entries.append(items.get_entries())
+            new_list = items.get_entries()
+            print(items.get_entries())
+            for entry in new_list:
+                entries.append(entry)
 
-        print(entries[0])
+        for items in entries:
+            print(items.get_ipfs_id())
 
-        posts = [1,2,3]
-
-        return posts
+        return entries
 
     def connect_comment_server(self):
         return 1

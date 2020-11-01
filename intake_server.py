@@ -43,7 +43,7 @@ class Server:
                 time_block = old_block
                 first_block = False
             else:
-                time_block = TimeBlock(old_block.get_block_hash)
+                time_block = TimeBlock(old_block.get_block_hash())
 
             clientsocket, addr = serversocket.accept() 
             print("Got a connection from %s" % str(addr))
