@@ -9,6 +9,7 @@ import pickle
 import random
 import time
 from time_block import TimeBlock
+import os
 
 
 
@@ -165,12 +166,18 @@ class Client:
             filename, filesize = items.split(SEPARATOR)
             filename = "./static/"+filename
             print(filename)
-            file = open(filename, 'r')
-            timeblock = pickle.load(file)
-            print(timeblock)
+            file = open(filename, 'rb')
+            print('file size:', os.path.getsize(filename))
+            timeblock = TimeBlock(1)
+            timeblock = pickle.loads(file.read())
             timeblocks.append(timeblock)
 
-        print(timeblocks[0])        
+        entries = []
+
+        for items in timeblocks:
+            entries.append(items.get_entries())
+
+        print(entries[0])
 
         posts = [1,2,3]
 

@@ -55,7 +55,6 @@ class PostServer:
                 print(counter)
                 filename = "./static/"+items
                 print(filename)
-                print(type(filename))
                 #file = open(filename, 'w')
                 #print(type(file))
                 with open(filename, 'rb') as data:
