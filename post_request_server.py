@@ -50,7 +50,7 @@ class PostServer:
             print(file_list)
 
             for items in file_list:
-                with open(items, 'r') as data:
+                with open("./static/"+items, 'r') as data:
                     data = pickle.dumps(data)
                 clientsocket.sendall(data)
             
