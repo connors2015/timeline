@@ -51,7 +51,7 @@ class PostServer:
             print(file_list)
         
             counter = 0
-
+            '''
             for items in file_list:
                 print(counter)
                 filename = "./static/"+items
@@ -64,7 +64,7 @@ class PostServer:
                     clientsocket.sendall(data.read())
                 clientsocket.recv(1024)
                 counter = counter + 1
-            
+            '''
             clientsocket.close()
 
 

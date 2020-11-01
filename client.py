@@ -145,8 +145,6 @@ class Client:
         
         print(file_list)
         print(new_file_list)
-
-        from urllib.request import urlretrieve
         
 
         print(len(new_file_list))
@@ -157,9 +155,9 @@ class Client:
                 url='http://13.82.102.90:58442/static/'+filename
                 data = requests.get(url=url)
                 print(data)
-                data_file.write(data.raw)
+                data_file.write(data.content)
         
-        print(sys.getsizeof(data_file)
+        print(sys.getsizeof(data_file))
         print('Obtained data.')
 
 
