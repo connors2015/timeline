@@ -22,7 +22,7 @@ client = Client()
 @app.route('/')
 def index():
     posts = get_posts(2)
-    #entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com')
+    #entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com') #use when there are no blocks
     #posts = [entry,entry,entry] #use when there are no blocks
     return render_template('index.html', time = time.ctime(), connected = client.isConnected, posts = posts)
 
@@ -49,7 +49,7 @@ def upload_new_post():
         file_hash, web_link = upload_file(request.files['file'])
         entry.set_ipfs_id(file_hash) 
         entry.set_title(title)
-        entry.set_comments(request.form['comments'])
+        entry.set_comments(request.form['comment'])
 
         try:
             check_submission = client.upload_to_submission_server(entry, server)
@@ -63,7 +63,7 @@ def upload_new_post():
         return render_template('viewer.html', link=web_link, connected = client.isConnected, time = time.ctime())
     else:
         entry.set_title(title)
-        entry.set_comments(request.form['comments'])
+        entry.set_comments(request.form['comment'])
         
         #submit to server 
         try:
