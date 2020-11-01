@@ -58,8 +58,9 @@ class PostServer:
                 print(filename)
                 #file = open(filename, 'w')
                 #print(type(file))
-                print('size of sent file:', sys.getsizeof(filename))
+                
                 with open(filename, 'rb') as data:
+                    print('size of sent file:', sys.getsizeof(data))
                     clientsocket.sendall(data.read())
                 clientsocket.recv(1)
                 counter = counter + 1
