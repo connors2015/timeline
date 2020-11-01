@@ -7,12 +7,14 @@ from entry import Entry
 import pickle
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
 import os
+import uuid
 
 class Server:
 
     def __init__(self):
         #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
         self.entry_buffer = []
+
 
     def listen_for_clients(self):
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,9 +32,6 @@ class Server:
 
 
         block_number = 0
-
-        print(os.getenv('AZURE_STORAGE_CONNECTION_STRING'))
-        print('hi')
 
         while True:
             # establish a connection
@@ -81,12 +80,27 @@ class Server:
 
 def main():
 
-    try:
-        print("Azure Blob storage v" + __version__ + " - Python quickstart sample")
-        # Quick start code goes here
-    except Exception as ex:
-        print('Exception:')
-        print(ex)
+    connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+    print(connect_str)
+    blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+    container_name = "quickstart" + str(uuid.uuid4())
+    container_client = blob_service_client.create_container(container_name)
+
+    local_path = "./data"
+    local_file_name = "quickstart" + str(uuid.uuid4()) + ".txt"
+    upload_file_path = os.path.join(local_path, local_file_name)
+
+    file = open(upload_file_path, 'w')
+    file.write("Hello, World!")
+    file.close()
+
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
+
+    with open(upload_file_path, "rb") as data:
+        blob_client.upload_blob(data)
+
+    print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
+
 
     server = Server()
     server.listen_for_clients()
