@@ -46,12 +46,7 @@ class Server:
             else:
                 time_block = TimeBlock(old_block.get_block_hash)
 
-            while (block_start_time + 60) > time.time():
-                clientsocket, addr = serversocket.accept()
-                break                
-            else:
-                write_block()        
-
+            clientsocket, addr = serversocket.accept() 
             print("Got a connection from %s" % str(addr))
             print('')
             data = clientsocket.recv(1024)
@@ -60,9 +55,10 @@ class Server:
             try:
                 entry = pickle.loads(data)
             except:
-                continue
+                entry = Entry(0)
+                break
 
-            print('{}\t\t{}\n{}\t{}'.format(entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
+            print('{}\n{}\t\t{}\n{}\t{}'.format(entry.get_title(), entry.get_time(), entry.get_url(), entry.get_category(), entry.get_ipfs_id()))
             self.entry_buffer.append(entry)
 
             print('')
@@ -72,7 +68,8 @@ class Server:
 
             time_block.add_new_entry(entry)
 
-            def write_block():
+            if (block_start_time + 60) > time.time():
+
                 block_start_time = int(time.time())
 
                 fileName = './blocks/{}_{}.blk'.format(block_start_time, block_number)
@@ -107,7 +104,6 @@ class Server:
             #currentTime = time.ctime(time.time()) + "\r\n"
             #clientsocket.send(currentTime.encode('ascii'))
             clientsocket.close()
-            block_start_time = time.time()
 
 
 def main():
