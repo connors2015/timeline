@@ -38,9 +38,9 @@ class Server:
 
         first_block = True
         old_block_hash = '1'
+        time_block = TimeBlock(old_block_hash)
 
-        while True:
-            time_block = TimeBlock(old_block_hash)
+        while True:            
 
             clientsocket, addr = serversocket.accept() 
             print("Got a connection from %s" % str(addr))
@@ -96,7 +96,7 @@ class Server:
                 self.entry_buffer.clear()
                 block_number = block_number + 1
 
-                old_block_hash = time_block.get_block_hash()
+                time_block = TimeBlock(time_block.get_block_hash())
 
           
 
