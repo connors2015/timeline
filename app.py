@@ -49,6 +49,7 @@ def upload_new_post():
         file_hash, web_link = upload_file(request.files['file'])
         entry.set_ipfs_id(file_hash) 
         entry.set_title(title)
+        entry.set_comments(request.form['comments'])
 
         try:
             check_submission = client.upload_to_submission_server(entry, server)
@@ -62,6 +63,7 @@ def upload_new_post():
         return render_template('viewer.html', link=web_link, connected = client.isConnected, time = time.ctime())
     else:
         entry.set_title(title)
+        entry.set_comments(request.form['comments'])
         
         #submit to server 
         try:

@@ -135,8 +135,10 @@
 								{% if items.get_ipfs_id() != '' %}
 								<a href='https://127.0.0.1:8080/ipfs/{{ items.get_ipfs_id() }}'></a>
 								<strong>{{ items.get_title() }}</strong>
+								<p>{{ items.get_comments() </p>
 								{% else %}
 								<strong>{{ items.get_title() }}</strong>
+								<p>{{ items.get_comments() </p>
 								<a href='https://{{ items.get_url() }}'></a>
 								{% endif %}
 							</p>

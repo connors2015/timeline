@@ -25,6 +25,7 @@ class Entry:
         url_hasher.update(binary_url)
         self.title = ''
         self.ipfs_id = ''
+        self.comments = ''
 
         #self.entry_ctime = ntp_time()
         self.entry_ctime = time.time()
@@ -45,6 +46,13 @@ class Entry:
 
     def get_url(self):
         return self.entry_url
+
+    def set_comments(self, comments):
+        self.comments = comments
+
+    def get_comments(self):
+        return self.comments
+
 
     def get_category(self):
         return self.category
