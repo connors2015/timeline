@@ -65,7 +65,7 @@ class PostServer:
 def main():
 
     post_server = PostServer()
-    post_server.listen_for_requests
+    post_server.listen_for_requests()
 
 if __name__ == "__main__":
     main()
