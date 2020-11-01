@@ -153,7 +153,7 @@ class Client:
             print(filesize)
             filename = "./static/"+filename
             with open(filename, 'wb') as file:
-                bytes_read = s.recv(int(filesize))
+                bytes_read = s.recv(5000)
                 file.write(bytes_read)
                 print('size of bytes read:', sys.getsizeof(bytes_read))
                 #if not bytes_read:
