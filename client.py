@@ -134,10 +134,10 @@ class Client:
 
         new_data = b''
 
-        data = s.recv(4096)
+        data = s.recv(1024)
         
 
-        file_list = pickle.loads(new_data)
+        file_list = new_data
 
         for items in file_list:
             filename, filesize = items.split(SEPARATOR)
