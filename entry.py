@@ -31,7 +31,7 @@ class Entry:
 
         self.entry_time_readable = time.ctime(self.entry_ctime)
 
-        self.category = TimeBlockCategories(category)
+        self.category = category
         self.entry_url = url
         self.entry_url_hash = url_hasher.hexdigest()
 

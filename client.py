@@ -10,24 +10,41 @@ import random
 import time
 
 
+
 IP='13.82.102.90'
 
 class Client:
 
+    
+
     isConnected = False
 
     def __init__(self):
-        self.client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001', session=True)
+        #self.client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/8080', session=True)
         self.isConnected = True
+        self.addr='http://13.82.102.90:8080/ipfs/'
 
     
     def upload_to_ipfs(self, fileName):
-        client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/5001')
-        try:            
-            res = self.client.add('./static/'+fileName)['Hash']
-        except:
-            print('IPFS Daemon not available.')
-        return res
+        print(fileName, 'sadasfafasfasdasda')
+        fileName = '{}'.format(fileName)
+        file_location = { 'file': open(fileName, 'rb')}
+        file = open("sample.txt", 'w')  
+    
+        # Overwrite the file  
+        file.write(" All content has been overwritten !") 
+        file.close()
+
+        file_location = { 'file': open("sample.txt", 'rb')}
+
+        r = requests.post(url=addr, files=file_location)
+        print(r.headers)
+        #client = ipfshttpclient.connect(addr='/ip4/'+IP+'/tcp/8080')
+        #try:            
+        #    res = self.client.add('./static/'+fileName)['Hash']
+        #except:
+        #    print('IPFS Daemon not available.')
+        return r.headers['ipfs-hash']
 
 
     def download_from_ipfs(self, res):
@@ -38,19 +55,22 @@ class Client:
 
     def view_on_ipfs(self, res):
         hashed_res = '{}'.format(res)
-        #res = self.client.get(hashed_res)
+        res = self.client.get(hashed_res)
         open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
         webbrowser.open(open_string, new=2)
 
     def view_on_web_client(self, res):
-        hashed_res = '{}'.format(res)
+        #hashed_res = '{}'.format(res)
         #res = self.client.get(hashed_res)
-        open_string = 'https://'+IP+':443/ipfs/{}'.format(hashed_res)
+        open_string = 'https://'+IP+':443/ipfs/{}'.format(res)
         return open_string
         #webbrowser.open(open_string, new=2)
 
     def connect_to_ipfs(self):
         return 1
+
+    def get_address(self):
+        return self.addr
 
     def disconnect_from_ipfs(self):
         self.client.close()

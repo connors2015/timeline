@@ -6,6 +6,7 @@ from time_enums import TimeBlockCategories
 from entry import Entry
 import os
 import time
+import requests
 
 UPLOAD_FOLDER = '/static/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'mp3', 'flac'}
@@ -22,7 +23,7 @@ client = Client()
 def index():
     return render_template('index.html', time = time.ctime(), connected = client.isConnected)
 
-@app.route('/new_post/', methods=['POST', 'GET'])
+@app.route('/new_post', methods=['POST', 'GET'])
 def upload_new_post():
 
     server = '1.1.1.1'
@@ -30,12 +31,16 @@ def upload_new_post():
     url = request.form['url']
     print(title, url)
 
-    entry = Entry(TimeBlockCategories.MISC, url)
+    print(request.form['category'])
+
+    post_category = TimeBlockCategories(int((request.form['category'])))
+
+    entry = Entry(post_category, url)
     #run upload file and retrieve IPFS hash and IPFS web hash
     file = request.files['file']
     if file.filename != '':
-        hashed_link, web_link = upload_file(request.files['file'])
-        entry.set_ipfs_id(hashed_link) 
+        file_hash, web_link = upload_file(request.files['file'])
+        entry.set_ipfs_id(file_hash) 
         entry.set_title(title)
 
         try:
@@ -70,7 +75,6 @@ def allowed_file(filename):
 
 @app.route('/upload')
 def upload_file(file):
-    file = file
     link = ''
     upload = ''
 
@@ -86,13 +90,18 @@ def upload_file(file):
         if os.path.isfile('./static/' + secure_filename(file.filename)):
             try:
                 print('upload_start')
-                upload = client.upload_to_ipfs(file.filename)
-                while upload == None:
+                file1 = open('./static/' + secure_filename(file.filename), 'rb')
+                req = requests.post(url=client.get_address(), data=file1)
+                file_hash = req.headers['ipfs-hash']
+                print(file_hash)
+                while file_hash == None:
                     time.sleep(1)
                 print('uploaded')
-                link = client.view_on_web_client(upload)
+                full_url = client.view_on_web_client(file_hash)
+                print(full_url)
        
             except:
+                print('error uploading')
                 string = 'error uploading to IPFS'
                 if os.path.exists('./static/' + secure_filename(file.filename)):
                     os.remove('./static/' + secure_filename(file.filename))
@@ -100,10 +109,11 @@ def upload_file(file):
 
     
     
-    if os.path.exists('./static/' + secure_filename(file.filename)):
-        os.remove('./static/' + secure_filename(file.filename))
+    #if os.path.exists('./static/' + secure_filename(file.filename)):
+    #    file.close()
+    #    os.remove('./static/' + secure_filename(file.filename))
 
-    return upload, link
+    return file_hash, full_url
 
 
 
