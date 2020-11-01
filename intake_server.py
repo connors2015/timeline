@@ -74,7 +74,7 @@ class Server:
                 fileName = './blocks/{}_{}.blk'.format(block_start_time, block_number)
                 upload_filename = '{}_{}.blk'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')
-                pickle.dumps(time_block, file)
+                pickle.dump(time_block, file)
                 file.close()
 
                 connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')

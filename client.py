@@ -185,7 +185,7 @@ class Client:
             print('file size:', os.path.getsize(filename))
             file = open(filename, 'rb')             
             time_block = TimeBlock(1)
-            time_block = pickle.loads(file.read())      
+            time_block = pickle.load(file.read())      
             #timeblock = pickle.load(file.read())
             timeblocks.append(time_block)
             #file.close()
