@@ -42,7 +42,7 @@ class PostServer:
             sending_file_list = []
 
             for items in file_list:
-                filesize = os.path.getsize("./static"+items)
+                filesize = os.path.getsize("./static/"+items)
                 sending_file_list.append((f"{items}{SEPARATOR}{filesize}".encode()))
             
             clientsocket.send(pickle.dumps(sending_file_list))

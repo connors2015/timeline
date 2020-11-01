@@ -135,10 +135,7 @@ class Client:
         new_data = b''
 
         data = s.recv(4096)
-        if not data:
-            break
-        else:
-            new_data += data
+        
 
         file_list = pickle.loads(new_data)
 
@@ -155,7 +152,7 @@ class Client:
 
         
 
-        blocks_from_server += data
+        blocks_from_server = 1
 
         posts = [1,2,3]
 
