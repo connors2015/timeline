@@ -14,6 +14,9 @@ class Server:
     def __init__(self):
         #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
         self.entry_buffer = []
+        connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
+        blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+
 
 
     def listen_for_clients(self):
@@ -59,14 +62,21 @@ class Server:
             if time.time() >= (block_start_time + 60):
                 block_start_time = int(time.time())
 
-                fileName = './blocks/{}_{}'.format(block_start_time, block_number)
+                fileName = './blocks/{}_{}.blk'.format(block_start_time, block_number)
                 file = open(fileName, 'wb')
                 pickle.dump(self.entry_buffer, file)
                 file.close()
 
+                blob_client = blob_service_client.get_blob_client(container='timeline-blocks', blob=fileName)
+
+                with open(upload_file_path, "rb") as data:
+                    blob_client.upload_blob(data)
+
                 print('*****************************************')
                 print('Timeblock #{} written at {}'.format(block_number, time.ctime(block_start_time)))
                 print('*****************************************')
+
+                os.remove(fileName)
 
                 self.entry_buffer.clear()
                 block_number = block_number + 1
@@ -79,27 +89,6 @@ class Server:
 
 
 def main():
-
-    connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-    print(connect_str)
-    blob_service_client = BlobServiceClient.from_connection_string(connect_str)
-    container_name = "quickstart" + str(uuid.uuid4())
-    container_client = blob_service_client.create_container(container_name)
-
-    local_path = "./data"
-    local_file_name = "quickstart" + str(uuid.uuid4()) + ".txt"
-    upload_file_path = os.path.join(local_path, local_file_name)
-
-    file = open(upload_file_path, 'w')
-    file.write("Hello, World!")
-    file.close()
-
-    blob_client = blob_service_client.get_blob_client(container=container_name, blob=local_file_name)
-
-    with open(upload_file_path, "rb") as data:
-        blob_client.upload_blob(data)
-
-    print("\nUploading to Azure Storage as blob:\n\t" + local_file_name)
 
 
     server = Server()
