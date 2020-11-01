@@ -11,7 +11,7 @@ class PostServer:
     def __init__(self):
         self.amount_of_blocks = 1
 
-    def listen_for_requests():
+    def listen_for_requests(self):
 
         serversocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         host = ''
