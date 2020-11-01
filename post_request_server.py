@@ -61,7 +61,7 @@ class PostServer:
                 #with open(filename, 'r') as data:
                 #    print(type(data))
                 #data = pickle.dumps(file)
-                clientsocket.sendall(data.encode())
+                clientsocket.sendall(data)
                 counter = counter + 1
             
             clientsocket.close()
