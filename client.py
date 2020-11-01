@@ -8,6 +8,7 @@ from time_enums import TimeBlockCategories
 import pickle
 import random
 import time
+from time_block import TimeBlock
 
 
 
@@ -157,13 +158,18 @@ class Client:
                 file.write(bytes_read)
                 print('writing file')
             s.send(b'1')
-           
 
-            
+        timeblocks = []
+        for items in new_file_list:
+            filename, filesize = items.split(SEPARATOR)
+            filename = "./static/"+filename
+            print(filename)
+            file = open(filename, 'rb')
+            timeblock = pickle.load(file)
+            print(timeblock)
+            timeblocks.append(timeblock)
 
-        
-
-        blocks_from_server = 1
+        print(timeblocks[0])        
 
         posts = [1,2,3]
 
