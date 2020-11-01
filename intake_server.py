@@ -15,7 +15,7 @@ class Server:
         #client = ipfshttpclient.connect(addr='/ip4/20.51.191.32/tcp/5001')
         self.entry_buffer = []
         connect_str = os.getenv('AZURE_STORAGE_CONNECTION_STRING')
-        blob_service_client = BlobServiceClient.from_connection_string(connect_str)
+        self.blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 
 
 
@@ -67,9 +67,9 @@ class Server:
                 pickle.dump(self.entry_buffer, file)
                 file.close()
 
-                blob_client = blob_service_client.get_blob_client(container='timeline-blocks', blob=fileName)
+                blob_client = self.blob_service_client.get_blob_client(container='timeline-blocks', blob=fileName)
 
-                with open(upload_file_path, "rb") as data:
+                with open(fileName, "rb") as data:
                     blob_client.upload_blob(data)
 
                 print('*****************************************')
