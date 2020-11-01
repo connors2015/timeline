@@ -56,12 +56,10 @@ class PostServer:
                 filename = "./static/"+items
                 print(filename)
                 print(type(filename))
-                file = open(filename, 'w')
-                print(type(file))
-                #with open(filename, 'r') as data:
-                #    print(type(data))
-                pickle.dump(data, file)
-                clientsocket.send(data)
+                #file = open(filename, 'w')
+                #print(type(file))
+                with open(filename, 'r') as data:
+                    clientsocket.sendall(data)
                 clientsocket.recv(1024)
                 counter = counter + 1
             
