@@ -145,7 +145,7 @@ class Client:
                 bytes_read = s.recv(int(filesize))
                 if not bytes_read:
                     break
-                bytes_read = pickle.loads(bytes_read)
+                #bytes_read = pickle.loads(bytes_read)
                 file.write(bytes_read)
                 file.close()
 
