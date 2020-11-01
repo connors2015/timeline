@@ -13,6 +13,7 @@ import time
 
 IP='13.82.102.90'
 #IP='127.0.0.1'
+SEPARATOR = "<SEPARATOR>"
 
 class Client:    
 
@@ -130,6 +131,31 @@ class Client:
         s.sendall(entry_bytes)
 
         #s.close()
+
+        new_data = b''
+
+        data = s.recv(4096)
+        if not data:
+            break
+        else:
+            new_data += data
+
+        file_list = pickle.loads(new_data)
+
+        for items in file_list:
+            filename, filesize = items.split(SEPARATOR)
+            with open(filename, 'rb') as file:
+                bytes_read = s.recv(int(filesize))
+                if not bytes_read:
+                    break
+                file.write(bytes_read)
+                file.close()
+
+            
+
+        
+
+        blocks_from_server += data
 
         posts = [1,2,3]
 

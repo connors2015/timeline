@@ -6,6 +6,8 @@ from time_block import TimeBlock
 from entry import Entry
 import socket
 
+SEPARATOR = "<SEPARATOR>"
+
 class PostServer:
 
     def __init__(self):
@@ -26,7 +28,7 @@ class PostServer:
         while True:
 
             clientsocket, addr = serversocket.accept() 
-            print("Got a connection from %s" % str(addr))
+            #print("Got a connection from %s" % str(addr))
             print('')
 
             data = clientsocket.recv(1024)
@@ -36,6 +38,23 @@ class PostServer:
             self.amount_of_blocks = pickle.loads(data)
 
             file_list = self.retrieve_blocks(self.amount_of_blocks)
+
+            sending_file_list = []
+
+            for items in file_list:
+                filesize = os.path.getsize("./static"+items)
+                sending_file_list.append((f"{items}{SEPARATOR}{filesize}".encode()))
+            
+            clientsocket.send(pickle.dumps(sending_file_list))
+
+            print(file_list)
+
+            for items in file_list:
+                with open(items, 'r') as data:
+                    data = pickle.dumps(data)
+                clientsocket.sendall(data)
+            
+            clientsocket.close()
 
 
     def retrieve_blocks(self, amount_of_blocks):
