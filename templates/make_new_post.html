@@ -111,6 +111,64 @@
 				filter: alpha(opacity=1); /* Fix to make div clickable in IE */
 			}		
 
+			* {
+			box-sizing: border-box;
+			}
+
+			input[type=text], select, textarea {
+			width: 100%;
+			padding: 12px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			resize: vertical;
+			}
+
+			label {
+			padding: 12px 12px 12px 0;
+			display: inline-block;
+			}
+
+			input[type=submit] {
+			background-color: #4CAF50;
+			color: white;
+			padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			float: right;
+			}
+
+			input[type=submit]:hover {
+			background-color: #45a049;
+			}
+
+			.container {
+			border-radius: 5px;
+			background-color: #000000;
+			padding: 20px;
+			padding-right: 40%;
+			color:#f2f2f2;
+			}
+
+			.col-25 {
+			float: left;
+			width: 25%;
+			margin-top: 6px;
+			}
+
+			.col-75 {
+			float: left;
+			width: 50%;
+			margin-top: 6px;
+			}
+
+			/* Clear floats after the columns */
+			.row:after {
+			content: "";
+			display: table;
+			clear: both;
+			}
+
 				
 		</style>
 		
@@ -130,28 +188,30 @@
 		<main> 
 			<div>
 				<h1>Post Options</h1>
-				<div>
-					<form action="/server_connect/">
-						<label for="server">Choose post server:</label>
-						<input list="servers" name="server" id="server">
-						<datalist id="servers">
-						<option value="Timeline Main">
-						<option value="Timeline Backup">
-						<option value="Other Server #1">
-						<option value="Other Server #2">
-						<option value="Other Server #3">
-						</datalist>
-						<input type="submit" value="Connect">
-					</form>
-				</div>
-				<div>
-					<form method=post enctype=multipart/form-data action="/new_post">
-						<label>Title:</label><input type=text id=title name=title><br>
-						<label>URL:</label><input type=text id=url name=url><br>
-						<p></p>
-						<label for="category">Post category:</label>
-						<input list="categories" name="category" id="category">
-						<datalist id="categories">
+				<div class="container">
+					<form action="/new_post">
+					  <div class="row">
+						<div class="col-25">
+						  <label for="title">Title</label>
+						</div>
+						<div class="col-75">
+						  <input type="text" id="title" name="title" placeholder="Make your title something descriptive and under 250 words.">
+						</div>
+					  </div>
+					  <div class="row">
+						<div class="col-25">
+						  <label for="url">URL</label>
+						</div>
+						<div class="col-75">
+						  <input type="text" id="url" name="url" placeholder="URL here.">
+						</div>
+					  </div>
+					  <div class="row">
+						<div class="col-25">
+						  <label for="category">Categories</label>
+						</div>
+						<div class="col-75">
+						  <select id="category" name="categories">
 							<option value=0>General</option>
 							<option value=1>Sports</option>                      
 							<option value=2>Politics</option>
@@ -161,12 +221,31 @@
 							<option value=6>Local</option>
 							<option value=7>Event</option>
 							<option value=8>MISC</option>
-						</datalist>
-						<p></p>  
-						<input type=file name=file>
-						<input type=submit value=Submit>
+						  </select>
+						</div>
+					  </div>
+					  <div class="row">
+						<div class="col-25">
+						  <label for="comment">Comment</label>
+						</div>
+						<div class="col-75">
+						  <textarea id="comment" name="comment" placeholder="Write something interesting..." style="height:200px"></textarea>
+						</div>
+						
+					  </div>
+					  <div class="row">
+						<div class="col-25">
+							<label for="file">Upload File:</label>							
+						</div>
+						<div class="col-75">
+							<input type="file" name="file">
+						</div>
+					  </div>
+					  <div class="row">
+						<input type="submit" value="Submit Post">
+					  </div>
 					</form>
-				</div> 
+				  </div> 
 			</div>
 		</main>
 
