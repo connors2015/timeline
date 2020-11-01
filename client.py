@@ -152,19 +152,16 @@ class Client:
             filename, filesize = items.split(SEPARATOR)
             print(filesize)
             filename = "./static/"+filename
-            while True:
-                with open(filename, 'wb') as file:
-                    bytes_read = s.recv(4096)
-                    while (bytes_read):
-                        file.write(bytes_read)
-                        print('size of bytes read:', sys.getsizeof(bytes_read))
-                        bytes_read = s.recv(4096)
-                    #if not bytes_read:
-                    #    break
-                    #bytes_read = pickle.loads(bytes_read)
-                    #file.write(bytes_read)
-                    
-                print('wrote file')
+            with open(filename, 'wb') as file:
+                bytes_read = s.recv(int(filesize))
+                file.write(bytes_read)
+                print('size of bytes read:', sys.getsizeof(bytes_read))
+                #if not bytes_read:
+                #    break
+                #bytes_read = pickle.loads(bytes_read)
+                #file.write(bytes_read)
+
+            print('wrote file')
             s.send(b'1')
 
         timeblocks = []

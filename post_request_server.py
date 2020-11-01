@@ -5,6 +5,7 @@ import os
 from time_block import TimeBlock
 from entry import Entry
 import socket
+import sys
 
 SEPARATOR = "<SEPARATOR>"
 
@@ -57,6 +58,7 @@ class PostServer:
                 print(filename)
                 #file = open(filename, 'w')
                 #print(type(file))
+                print('size of sent file:', sys.getsizeof(filename))
                 with open(filename, 'rb') as data:
                     clientsocket.sendall(data.read())
                 clientsocket.recv(1)
