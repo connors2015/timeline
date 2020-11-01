@@ -72,9 +72,9 @@ def upload_new_post():
 
 
 
-@app.route('/server_connect/')
-def connect_to_post_server():
-    client.connect_post_server()
+@app.route('/server_connect/<string:server>')
+def connect_to_post_server(server):
+    client.connect_post_server(server)
     return render_template('index.html', connected = client.isConnected, time = time.ctime())
 
 def allowed_file(filename):

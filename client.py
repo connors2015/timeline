@@ -211,6 +211,9 @@ class Client:
     def connect_comment_server(self):
         return 1
 
+    def connect_to_post_server(self, server):
+        return 1
+
 def main():
 
     #app.run()

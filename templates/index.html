@@ -32,7 +32,7 @@
 			top: 0;
 			bottom: 0;
 			right: 0;
-			width: 30%;
+			width: 400px;
 			overflow: auto; /* Scrollbars will appear on this frame only when there's enough content to require scrolling. To disable scrollbars, change to "hidden", or use "scroll" to enable permanent scrollbars */
 			background: #2c2c2c; 		
 		}
@@ -45,7 +45,7 @@
 			position: fixed;
 			top: 80px; /* Set this to the height of the header */
 		    /*right: 50%; /* Set this to the width of the nav bar */ 
-            width: 70%;
+            width: 100%;
 			bottom: 0;
 			overflow: auto; 
 			background: rgb(0, 0, 0);
@@ -157,13 +157,18 @@
 		<nav id="nav">
 			<div class="innertube">
 				<h1>Post Server</h1>
-				<ul>
-					<li><a href="#">Link 1</a></li>
-					<li><a href="#">Link 2</a></li>
-					<li><a href="#">Link 3</a></li>
-					<li><a href="#">Link 4</a></li>
-					<li><a href="#">Link 5</a></li>
-				</ul>
+				<form action="/server_connect/">
+					<label for="server">Choose post server:</label>
+					<input list="servers" name="server" id="server">
+					<datalist id="servers">
+					<option value="Timeline Main">
+					<option value="Timeline Backup">
+					<option value="Other Server #1">
+					<option value="Other Server #2">
+					<option value="Other Server #3">
+					</datalist>
+					<input type="submit" value="Connect">
+				</form>
 				<h1>Comment Server</h1>
 				<ul>
 					<li><a href="#">Link 1</a></li>
