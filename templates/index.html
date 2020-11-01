@@ -42,6 +42,7 @@
 
     <body>
         <div class='content'>
+
             <table style="height: 24px; width: 100%; float: center;padding: 0px;border: 1px solid black;">
                 <tbody>
                     <tr>
@@ -58,26 +59,28 @@
             <p></p>
 
 
-            <table style="height: 800px; width:100%; border-color: black;">
+            <table style="height: 800px; width:100%; border-color: black; overflow-y:scroll">
                 <tbody>
                     <tr style="height: 100%;">
-                        <td colspan="2" style="border: 1px solid black; height:100%; width:100%; padding: 5px;">
-                            {% for items in posts %}
-                                <div style="background-color: beige;">
-                                    <p>
-                                        {% if items.get_ipfs_id() != '' %}
-                                        <a href='https://ipfs.io/ipfs/{{ items.get_ipfs_id() }}'><strong>{{ items.get_title() }}</strong></a>
-                                        {% else %}
-                                        <strong>{{ items.get_title() }}</strong>
-                                        {% endif %}
-                                    </p>
-                                    <p>
-                                        <a href='https://{{ items.get_url() }}'>{{ items.get_url() }}</a><br>
-                                        IPFS id: {{ items.get_ipfs_id() }}
-                                    </p>
-                                </div>
-                            {% endfor %}
-                        </td>
+                        <div style="overflow-y: scrolls;">
+                            <td colspan="2" style="border: 1px solid black; height:100%; width:100%; padding: 5px;">
+                                {% for items in posts %}
+                                    <div style="background-color: beige;">
+                                        <p>
+                                            {% if items.get_ipfs_id() != '' %}
+                                            <a href='https://ipfs.io/ipfs/{{ items.get_ipfs_id() }}'><strong>{{ items.get_title() }}</strong></a>
+                                            {% else %}
+                                            <strong>{{ items.get_title() }}</strong>
+                                            {% endif %}
+                                        </p>
+                                        <p>
+                                            <a href='https://{{ items.get_url() }}'>{{ items.get_url() }}</a><br>
+                                            IPFS id: {{ items.get_ipfs_id() }}
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </td>
+                        </div>
                         <td style="border: 2px solid black; width:200px;">
                             <iframe style="border: 1px solid black; height:100%; width:100%;" src="./static/home.html" title="page"></iframe>
                         </td>
