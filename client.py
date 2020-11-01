@@ -14,9 +14,7 @@ import time
 IP='13.82.102.90'
 #IP='127.0.0.1'
 
-class Client:
-
-    
+class Client:    
 
     isConnected = False
 
@@ -115,8 +113,25 @@ class Client:
         ipfs_links_to_blocks = []
         return 1
 
-    def connect_post_server(self):
-        return 1
+    def get_posts(self, num_blocks):
+        
+        host = IP 
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        port = 58443
+
+        # connection to hostname on the port.
+        s.connect((host, port))
+
+        # Receive no more than 1024 bytes
+        # tm = s.recv(1024)
+
+        
+        entry_bytes = pickle.dumps(num_blocks)
+        s.sendall(entry_bytes)
+
+        #s.close()
+
+        return posts
 
     def connect_comment_server(self):
         return 1
@@ -125,7 +140,7 @@ def main():
 
     #app.run()
 
-    new_user = User()
+    #new_user = User()
 
     client = Client()    
     #print('Uploading.')
@@ -134,10 +149,10 @@ def main():
     #print('Downloading.')
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
-    while True:
-        entry = Entry(TimeBlockCategories.MISC, 'reddit.com')
-        client.upload_to_submission_server(entry, '1')
-        time.sleep(random.randint(0,10))
+    #while True:
+    #    entry = Entry(TimeBlockCategories.MISC, 'reddit.com')
+    #    client.upload_to_submission_server(entry, '1')
+    #    time.sleep(random.randint(0,10))
     #client.view_on_ipfs(res)
     #client.disconnect_from_ipfs()
 

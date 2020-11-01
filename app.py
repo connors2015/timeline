@@ -21,7 +21,8 @@ client = Client()
 
 @app.route('/')
 def index():
-    return render_template('index.html', time = time.ctime(), connected = client.isConnected)
+    posts = get_posts(2)
+    return render_template('index.html', time = time.ctime(), connected = client.isConnected, posts = posts)
 
 @app.route('/new_post', methods=['POST', 'GET'])
 def upload_new_post():
@@ -115,7 +116,9 @@ def upload_file(file):
 
     return file_hash, full_url
 
-
+def get_posts(num_blocks):
+    posts = client.get_posts(num_blocks)
+    return posts
 
 def main():
     app.run()

@@ -7,7 +7,6 @@ from entry import Entry
 import pickle
 from azure.storage.blob import BlobServiceClient, BlobClient, ContainerClient, __version__
 import os
-import uuid
 from time_block import TimeBlock
 
 class Server:
@@ -64,7 +63,7 @@ class Server:
             print('')
 
 
-            entry = Entry("MISC", "www.reddit.com")
+            #entry = Entry("MISC", "www.reddit.com")
 
             time_block.add_new_entry(entry)
 
