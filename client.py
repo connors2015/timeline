@@ -145,19 +145,19 @@ class Client:
         
         print(file_list)
         print(new_file_list)
+
+        timeblocks = []
         
 
         print(len(new_file_list))
         for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
             #filename = "./static/"+filename
-            with open(filename, 'wb') as data_file:
-                url='http://13.82.102.90:58442/static/'+filename
-                data = requests.get(url=url)
-                print(data)
-                data_file.write(data.content)
-        
-        print(sys.getsizeof(data_file))
+            url='http://13.82.102.90:58442/static/'+filename
+            data = requests.get(url=url)
+            time_block = pickle.loads(data.content)
+            timeblocks.append(time_block)
+    
         print('Obtained data.')
 
 
@@ -178,7 +178,7 @@ class Client:
             print('wrote file')
             s.send(b'1')
         
-        timeblocks = []
+        
         
         for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
@@ -191,7 +191,7 @@ class Client:
             #timeblock = pickle.load(file.read())
             timeblocks.append(time_block)
             #file.close()
-
+        '''
         entries = []
 
         print('number of timeblocks:', len(timeblocks))
@@ -204,9 +204,9 @@ class Client:
 
         for items in entries:
             print(items.get_ipfs_id())
-        '''
-        posts = [Entry(1, 'r'), Entry(1,'r'),Entry(1, 'r')]
-        return posts
+        
+        #posts = [Entry(1, 'r'), Entry(1,'r'),Entry(1, 'r')]
+        return entries
 
     def connect_comment_server(self):
         return 1
