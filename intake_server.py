@@ -46,13 +46,12 @@ class Server:
             else:
                 time_block = TimeBlock(old_block.get_block_hash)
 
-            while (block_start_time + 60) < time.time():
+            while (block_start_time + 60) > time.time():
                 clientsocket, addr = serversocket.accept()
-                break
-                
+                break                
             else:
                 write_block()        
-                
+
             print("Got a connection from %s" % str(addr))
             print('')
             data = clientsocket.recv(1024)
