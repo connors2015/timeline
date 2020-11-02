@@ -133,7 +133,7 @@
 						<div class = "feature" style="background-color: rgb(131, 131, 131);">
 							<p>
 								{% if items.get_ipfs_id() != '' %}
-								<a href='https://ipfs.io/ipfs/{{ items.get_ipfs_id() }}'></a>
+								<a href='./viewer_wcomments/{{ items.get_ipfs_id() }}'></a>
 								<strong>{{ items.get_title() }}</strong>
 								<p>{{ items.get_comments() }} </p>
 								{% else %}
