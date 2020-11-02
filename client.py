@@ -143,8 +143,8 @@ class Client:
         for items in file_list:
             new_file_list.append(items.decode())
         
-        print(file_list)
-        print(new_file_list)
+        #print(file_list)
+        #print(new_file_list)
 
         timeblocks = []
         
@@ -194,7 +194,7 @@ class Client:
         '''
         entries = []
 
-        print('number of timeblocks:', len(timeblocks))
+        #print('number of timeblocks:', len(timeblocks))
 
         for items in timeblocks:
             new_list = items.get_entries()
@@ -202,11 +202,23 @@ class Client:
             for entry in new_list:
                 entries.append(entry)
 
-        for items in entries:
-            print(items.get_ipfs_id())
+        #for items in entries:
+        #    print(items.get_ipfs_id())
+
+
+        reversed_entries = []
+
+        length_entries = len(entries)
+
+        for items in range(length_entries-1, 0, -1):
+            reversed_entries.append(entries[items])
+
+        print(type(entries))
+        print(type(reversed_entries))
         
         #posts = [Entry(1, 'r'), Entry(1,'r'),Entry(1, 'r')]
-        return entries
+        print(entries, reversed_entries)
+        return reversed_entries
 
     def connect_comment_server(self):
         return 1
