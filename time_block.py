@@ -9,19 +9,15 @@ import hashlib
 class TimeBlock:
 
     block_hasher = hashlib.sha3_256()
-    block_ctime = ntp_time()
-    block_time = time.ctime(block_ctime)
-    previous_ipfs_hash = ''
-    entries = []
 
     def __init__(self, previous_ipfs_hash):
         self.previous_ipfs_hash = previous_ipfs_hash
+        self.block_ctime = time.time()
+        self.block_time = time.ctime(self.block_ctime)
+        self.entries = []
 
     def add_new_entry(self, entry):
-        if isinstance(entry, Entry):
             self.entries.append(entry)
-        else:
-            print('Invalid Entry.')
 
     def get_block_hash(self):
 
@@ -36,6 +32,9 @@ class TimeBlock:
         self.block_hasher.update(hash_setup)
 
         return self.block_hasher.hexdigest()
+
+    def get_entries(self):
+        return self.entries
 
     def get_block_time(self):
         return self.block_time

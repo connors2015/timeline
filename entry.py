@@ -24,6 +24,8 @@ class Entry:
         binary_url = bytes(url, 'utf-8')
         url_hasher.update(binary_url)
         self.title = ''
+        self.ipfs_id = ''
+        self.comments = ''
 
         #self.entry_ctime = ntp_time()
         self.entry_ctime = time.time()
@@ -31,7 +33,7 @@ class Entry:
 
         self.entry_time_readable = time.ctime(self.entry_ctime)
 
-        self.category = TimeBlockCategories(category)
+        self.category = category
         self.entry_url = url
         self.entry_url_hash = url_hasher.hexdigest()
 
@@ -44,6 +46,13 @@ class Entry:
 
     def get_url(self):
         return self.entry_url
+
+    def set_comments(self, comments):
+        self.comments = comments
+
+    def get_comments(self):
+        return self.comments
+
 
     def get_category(self):
         return self.category
@@ -69,16 +78,19 @@ class Entry:
     def set_title(self, title):
         self.title = title
 
+    def set_url(self, url):
+        self.entry_url = url
+
     def get_title(self):
         return self.title
 
     def open_url_snapshot(self):
         webbrowser.open('{}'.format(self.entry_url), new=2)
 
-    def set_ipfs_id(self, hash):
-        self.ipfs_id = hash
+    def set_ipfs_id(self, hashed_link):
+        self.ipfs_id = hashed_link
 
-    def store_url_snapshot(self, url):
+    def store_url_snapshot(self):
         url = self.entry_url
 
         response = urllib.request.urlopen(url)
