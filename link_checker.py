@@ -16,7 +16,7 @@ from subprocess import Popen, PIPE
 #subprocess.call("ipfs get "+ "" + "QmXfcjBHoXvLPvskjCYikGbC5TmUwE8BDr3WRVasRKaJ1x")
 
 p = Popen(['ls', 'la'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-output, err = p.communicate(b"ipfs get QmXfcjBHoXvLPvskjCYikGbC5TmUwE8BDr3WRVasRKaJ1x' stdin")
+output, err = p.communicate()
 rc = p.returncode
 
 print(output)
