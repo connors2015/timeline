@@ -117,7 +117,7 @@ class Client:
         ipfs_links_to_blocks = []
         return 1
 
-    def get_posts(self, num_blocks):
+    def get_posts(self, num_blocks, link_checker):
         
         host = IP 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -147,9 +147,21 @@ class Client:
         #print(new_file_list)
 
         timeblocks = []
+
+        test_entry_links = []
+
+        if link_checker == True:
+            from link_checker import check_links
+            test_entry_links = check_links(new_file_list)
+
+        reversed_test_entry_links = []
+        test_entry_links_length = len(test_entry_links)
+        
+        for items in range(test_entry_links_length-1, 0, -1):
+            reversed_test_entry_links.append(test_entry_links[items])
+            
         
 
-        print(len(new_file_list))
         for items in new_file_list:
             filename, filesize = items.split(SEPARATOR)
             #filename = "./static/"+filename
@@ -213,12 +225,11 @@ class Client:
         for items in range(length_entries-1, 0, -1):
             reversed_entries.append(entries[items])
 
-        print(type(entries))
-        print(type(reversed_entries))
+
         
         #posts = [Entry(1, 'r'), Entry(1,'r'),Entry(1, 'r')]
         print(entries, reversed_entries)
-        return reversed_entries
+        return reversed_entries, reversed_test_entry_links
 
     def connect_comment_server(self):
         return 1

@@ -21,7 +21,7 @@ client = Client()
 
 @app.route('/')
 def index():
-    posts = get_posts(2)
+    posts, valid_links = get_posts(2, 0)
     #entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com') #use when there are no blocks
     #posts = [entry,entry,entry] #use when there are no blocks
     return render_template('index.html', time = time.ctime(), connected = client.isConnected, posts = posts)
