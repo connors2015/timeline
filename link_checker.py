@@ -13,10 +13,10 @@ import subprocess
 #subprocess.check_output("dir",stderr=subprocess.STDOUT,shell=True)
 
 from subprocess import Popen, PIPE
-subprocess.call("ipfs get "+ "" + "QmXfcjBHoXvLPvskjCYikGbC5TmUwE8BDr3WRVasRKaJ1x")
+#subprocess.call("ipfs get "+ "" + "QmXfcjBHoXvLPvskjCYikGbC5TmUwE8BDr3WRVasRKaJ1x")
 
 p = Popen(['ls', 'la'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
-output, err = p.communicate(b"input data that is passed to subprocess' stdin")
+output, err = p.communicate(b"ipfs get QmXfcjBHoXvLPvskjCYikGbC5TmUwE8BDr3WRVasRKaJ1x' stdin")
 rc = p.returncode
 
 print(output)
