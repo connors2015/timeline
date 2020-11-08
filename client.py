@@ -237,6 +237,10 @@ class Client:
     def connect_to_post_server(self, server):
         return 1
 
+    def create_new_user(self):
+        return 1
+
+
 def main():
 
     #app.run()

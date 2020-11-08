@@ -7,6 +7,7 @@ from entry import Entry
 import os
 import time
 import requests
+from user import User
 
 UPLOAD_FOLDER = '/static/'
 ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif', 'mp4', 'mp3', 'flac'}
@@ -21,9 +22,9 @@ client = Client()
 
 @app.route('/')
 def index():
-    posts, valid_links = get_posts(2, 0)
-    #entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com') #use when there are no blocks
-    #posts = [entry,entry,entry] #use when there are no blocks
+    #posts, valid_links = get_posts(2)
+    entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com') #use when there are no blocks
+    posts = [entry,entry,entry] #use when there are no blocks
     return render_template('index.html', time = time.ctime(), connected = client.isConnected, posts = posts)
 
 @app.route('/viewer_wcomments/<string:hash>')
@@ -89,6 +90,11 @@ def connect_to_post_server(server):
     client.connect_post_server(server)
     return render_template('index.html', connected = client.isConnected, time = time.ctime())
 
+@app.route('/new_user')
+def new_user():
+    #client.create_new_user()
+    return render_template('new_user.html', time = time.ctime())
+
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -136,7 +142,7 @@ def upload_file(file):
     return file_hash, full_url
 
 def get_posts(num_blocks):
-    posts = client.get_posts(num_blocks)
+    posts = client.get_posts(num_blocks, 0)
     return posts
 
 def main():
