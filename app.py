@@ -22,9 +22,9 @@ client = Client()
 
 @app.route('/')
 def index():
-    #posts, valid_links = get_posts(2)
-    entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com') #use when there are no blocks
-    posts = [entry,entry,entry] #use when there are no blocks
+    posts, valid_links = get_posts(2)
+    #entry = Entry(TimeBlockCategories.MISC, 'www.reddit.com') #use when there are no blocks
+    #posts = [entry,entry,entry] #use when there are no blocks
     return render_template('index.html', time = time.ctime(), connected = client.isConnected, posts = posts)
 
 @app.route('/viewer_wcomments/<string:hash>')
