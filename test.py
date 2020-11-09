@@ -11,7 +11,7 @@ host = IP #switch to server eventually
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 # get local machine name
 #host = socket.gethostname()
-port = 58444
+port = 58442
 
 # connection to hostname on the port.
 s.connect((host, port))
