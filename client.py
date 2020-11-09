@@ -167,7 +167,8 @@ class Client:
             #filename = "./static/"+filename
             url='http://13.82.102.90:58442/static/'+filename
             data = requests.get(url=url)
-            time_block = pickle.loads(data.content)
+            with open(filename, 'wb') as file:
+                time_block = pickle.loads(data.content)
             timeblocks.append(time_block)
     
         print('Obtained data.')
