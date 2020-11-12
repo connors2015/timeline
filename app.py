@@ -90,10 +90,10 @@ def connect_to_post_server(server):
     client.connect_post_server(server)
     return render_template('index.html', connected = client.isConnected, time = time.ctime())
 
-@app.route('/new_user')
-def new_user():
+@app.route('/new_user/<boolean:created>')
+def new_user(created):
     #client.create_new_user()
-    return render_template('new_user.html', time = time.ctime())
+    return render_template('new_user.html', time = time.ctime(), created=created)
 
 def allowed_file(filename):
     return '.' in filename and \
